@@ -1,21 +1,23 @@
-import React, { useState, useEffect } from "react";
-import { Redirect } from "react-router-dom";
-import { useDispatch, useSelector } from 'react-redux';
-import { login } from "../../store/session";
+import React, { useState } from 'react';
+import { NavLink, Redirect } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux'
+import styles from './home.module.css';
 
-const LoginForm = (props) => {
+import { login } from '../../store/session';
+
+const Home = () => {
   const dispatch = useDispatch();
-  const user = useSelector(state => state.session.user);
+  const user = useSelector(state => state.session.user)
   const sessionLoaded = useSelector(state => state.session.loaded);
 
-  const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState([]);
 
   const onLogin = async (e) => {
     e.preventDefault();
     dispatch(login(email, password))
-    .catch(err => setErrors(err.errors));
+      .catch(err => setErrors(err.errors));
   };
 
   const updateEmail = (e) => {
@@ -25,20 +27,24 @@ const LoginForm = (props) => {
   const updatePassword = (e) => {
     setPassword(e.target.value);
   };
+  console.log(sessionLoaded, user)
 
-  useEffect(() => {
-    if (props.location.state && props.location.state.errors) {
-      setErrors(props.location.state.errors)
-    }
-  }, [dispatch])
-
-  if (sessionLoaded && user) {
-    return <Redirect to='/' />;
+  if (errors.length > 0) {
+    return <Redirect to={{
+      pathname: "/login",
+      state: { errors: errors }
+    }}/>;
   }
-
-
+  // Logged In
+  if (sessionLoaded && user) return (
+    <div className={styles.home_container}>
+    </div>
+  );
+  // Logged Out
   return (
-    <form onSubmit={onLogin}>
+    <div className={styles.home_container}>
+      <div></div>
+      <form onSubmit={onLogin}>
       <div>
         {errors.map((error, idx) => (
           <div key={idx}>{error}</div>
@@ -66,7 +72,8 @@ const LoginForm = (props) => {
         <button type="submit">Login</button>
       </div>
     </form>
+    </div>
   );
-};
+}
 
-export default LoginForm;
+export default Home;
