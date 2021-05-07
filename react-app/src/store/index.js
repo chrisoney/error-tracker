@@ -3,8 +3,8 @@ import {
   combineReducers,
   applyMiddleware,
   compose
-} from 'react-redux';
-import { thunk } from 'redux-thunk';
+} from 'redux';
+import thunk from 'redux-thunk';
 
 import sessionReducer from './session';
 import modalReducer from './modal';

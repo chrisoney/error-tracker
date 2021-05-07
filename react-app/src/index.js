@@ -1,6 +1,6 @@
-import React, { useDispatch } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
+import { Provider, useDispatch } from 'react-redux';
 
 import App from './App';
 import configureStore from './store';

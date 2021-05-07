@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useSelector } from 'react';
 import { NavLink } from 'react-router-dom';
-import LogoutButton from './auth/LogoutButton';
+import LogoutButton from '../auth/LogoutButton';
+import styles from './navbar.module.css';
 
 const NavBar = ({ setAuthenticated }) => {
+  // const user = useSelector(state => state.session.user)
   return (
-    <nav>
+    <nav className={styles.nav}>
       <ul>
-        <li>
-          <NavLink to="/" exact={true} activeClassName="active">
+        <li >
+          <NavLink to="/" exact={true} className={styles.nav_list_item} activeClassName="active">
             Home
           </NavLink>
         </li>

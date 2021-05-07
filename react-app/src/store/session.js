@@ -1,12 +1,12 @@
 const CREATE_SESSION = 'session/create';
 const DESTROY_SESSION = 'session/delete';
 
-const createSession = user = ({
+const createSession = (user) => ({
   type: CREATE_SESSION,
   user
 })
 
-const destroySession = ({
+const destroySession = () => ({
   type: DESTROY_SESSION
 })
 
@@ -17,11 +17,7 @@ export const authenticate = () => async dispatch => {
     }
   });
   const data = await response.json();
-  if (data.errors) {
-    const err = new Error('Unauthorized');
-    err.errors = data.errors;
-    throw err;
-  } else dispatch(createSession(data));
+  if (!data.errors) dispatch(createSession(data));
 }
 
 export const login = (email, password) => async dispatch => {
@@ -74,7 +70,7 @@ export const signUp = (username, email, password) => async dispatch => {
 }
 
 export default function reducer(
-  state = { user: null, loading: false }, action
+  state = { user: null, loaded: false }, action
 ) {
   switch (action.type) {
     case CREATE_SESSION:
