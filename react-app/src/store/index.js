@@ -6,8 +6,12 @@ import {
 } from 'react-redux';
 import { thunk } from 'redux-thunk';
 
-const rootReducer = combineReducers({
+import sessionReducer from './session';
+import modalReducer from './modal';
 
+const rootReducer = combineReducers({
+  session: sessionReducer,
+  modal: modalReducer,
 })
 
 let enhancer;
