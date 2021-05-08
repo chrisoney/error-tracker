@@ -13,6 +13,11 @@ class Module(db.Model):
     back_populates="modules"
   )
 
+  errors = db.relationship(
+    "Error",
+    back_populates="module"
+  )
+
   def to_dict(self):
     return {
       "id": self.id,

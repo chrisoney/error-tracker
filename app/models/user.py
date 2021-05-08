@@ -16,6 +16,10 @@ class User(db.Model, UserMixin):
     secondary=subscriptions, 
     back_populates="users"
   )
+  errors = db.relationship(
+    "Error", 
+    back_populates="user"
+  )
 
 
   @property
