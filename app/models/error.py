@@ -28,6 +28,7 @@ class Error(db.Model):
     return {
       "id": self.id,
       "title": self.title,
+      "description": self.description,
       "user": self.user.to_dict(),
       "module": self.module.to_dict(),
       "images": [image.url for image in self.images]
