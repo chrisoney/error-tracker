@@ -16,12 +16,11 @@ const NavBar = () => {
     <nav className={styles.nav}>
       <ul>
         <li >
-          <NavLink to="/" exact={true} className={styles.nav_list_item} activeClassName="active">
-            Home
+          <NavLink to="/home" exact={true} className={`${styles.nav_list_item} fas fa-trash`}activeClassName="active">
           </NavLink>
         </li>
         <li>
-          <NavLink to="/users" exact={true} activeClassName="active">
+          <NavLink to="/users" exact={true} className={styles.nav_list_item} activeClassName="active">
             Users
           </NavLink>
         </li>
@@ -36,12 +35,11 @@ const NavBar = () => {
     <nav className={styles.nav}>
       <ul>
         <li >
-          <NavLink to="/" exact={true} className={styles.nav_list_item} activeClassName="active">
-            Home
+        <NavLink to="/" exact={true} className={`${styles.nav_list_item} fas fa-trash`}activeClassName="active">
           </NavLink>
         </li>
         <li>
-          <NavLink to="/sign-up" exact={true} activeClassName="active">
+          <NavLink to="/sign-up" className={styles.nav_list_item} exact={true} activeClassName="active">
             Sign Up
           </NavLink>
         </li>

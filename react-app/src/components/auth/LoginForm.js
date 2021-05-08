@@ -3,6 +3,8 @@ import { Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from "../../store/session";
 
+import styles from './auth.module.css';
+
 const LoginForm = (props) => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.session.user);
@@ -33,15 +35,15 @@ const LoginForm = (props) => {
   }, [dispatch])
 
   if (sessionLoaded && user) {
-    return <Redirect to='/' />;
+    return <Redirect to='/home' />;
   }
 
 
   return (
-    <form onSubmit={onLogin}>
+    <form className={styles.form} onSubmit={onLogin}>
       <div>
         {errors.map((error, idx) => (
-          <div key={idx}>{error}</div>
+          <div className={styles.error} key={idx}>{error}</div>
         ))}
       </div>
       <div>

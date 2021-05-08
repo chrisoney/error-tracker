@@ -39,7 +39,7 @@ const SignUpForm = ({ authenticated, setAuthenticated }) => {
   };
 
   if (sessionLoaded && user) {
-    return <Redirect to="/" />;
+    return <Redirect to="/home" />;
   }
 
   return (

@@ -1,0 +1,53 @@
+.home_container, .form_container, .form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header {
+  font-size: 45px;
+}
+
+.short_desc {
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
+.form_container {
+  width: 540px;
+}
+
+.form {
+  color: green;
+}
+
+
+.about_section {
+  height: 50px;
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+}
+
+.about_section_left{
+  margin-left: 20px;
+  display: flex;
+}
+
+.about_icon {
+  color: black;
+  font-size: 24px;
+  text-decoration: none;
+  margin-right: 10px;
+}
+
+.about_icon:hover {
+  color: blue;
+}
+
+.about_section_right {
+  margin-right: 20px;
+}

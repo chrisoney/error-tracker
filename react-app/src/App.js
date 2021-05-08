@@ -8,6 +8,8 @@ import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
 import User from "./components/User";
 import Home from './components/Home';
+import Splash from './components/Splash';
+import Module from './components/Module';
 
 import { authenticate } from './store/session';
 
@@ -28,7 +30,7 @@ function App() {
       <NavBar  />
       <Switch>
         <Route path="/" exact={true}>
-          <Home />
+          <Splash />
         </Route>
         <Route path="/login" exact={true} render={(props) => <LoginForm {...props} />} />
           {/* <LoginForm />
@@ -42,8 +44,11 @@ function App() {
         <ProtectedRoute path="/users/:userId" exact={true} >
           <User />
         </ProtectedRoute>
-        <ProtectedRoute path="/" exact={true} >
+        <ProtectedRoute path="/home" exact={true} >
           <Home />
+        </ProtectedRoute>
+        <ProtectedRoute path="/modules/:id" exact={true} >
+          <Module />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>
