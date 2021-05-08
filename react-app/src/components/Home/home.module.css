@@ -1,5 +1,6 @@
 .home_container {
   display: grid;
+  padding: 20px;
   grid-template-columns: 200px 1fr;
 }
 
@@ -7,6 +8,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.left_aside {
+  padding-right: 10px;
+  border-right: 1px solid #333;
+}
+
+.right_main {
+  padding-left: 10px;
 }
 
 .module_link {
@@ -18,14 +28,43 @@
   margin-bottom: 10px;
   text-align: center;
   cursor:pointer;
+  min-width: 100px;
 }
 
-.module_add {
-  color: white;
-  background-color: blue;
-  border-radius: 3px;
-  padding: 10px;
-  cursor:pointer;
+.new_mod_form{
+  display:flex;
+  justify-content: center;
+}
+
+.new_mod_input{
+  border-right: none;
+  border-left: none;
+  border: 1px solid #666;
+  text-decoration: none;
+  width: 70%;
+}
+.new_mod_input::placeholder{
+  text-align: center;
+}
+
+.new_mod_input:focus{
+  outline: none;
+}
+
+.new_mod_button{
+  cursor: pointer;
+  color: #333;
+  background-color: #666;
+  padding: 5px;
+}
+
+.new_mod_button:first-of-type{
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.new_mod_button:last-of-type{
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
 }
 
 .error_feed_title {
@@ -48,8 +87,9 @@
 }
 
 .err_img {
-  height: 200px;
-  width: auto;
+  width: 200px;
+  height: 150px;
+  object-fit: cover;
   margin-right: 10px;
   display: inline-block;
 }

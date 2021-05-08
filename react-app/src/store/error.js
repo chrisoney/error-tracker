@@ -25,6 +25,7 @@ export const fetchAllErrors = () => async dispatch => {
   });
   const data = await response.json();
   if (!data.errors) dispatch(getAllErrors(data.errorsArray));
+  return
 }
 
 export default function reducer(

@@ -12,6 +12,7 @@ const Home = () => {
   const errors = useSelector(state => state.errors)
   const [name, setName] = useState('')
   const [revealForm, setRevealForm] = useState(false)
+  const [randomNum, setRandomNum] = useState(null)
 
   function submitNewModule(){
     dispatch(addNewModule(name))
@@ -20,6 +21,8 @@ const Home = () => {
   useEffect(() => {
     dispatch(fetchAllModules())
     dispatch(fetchAllErrors())
+    setRandomNum(Math.floor(Math.random() * 100))
+
   }, [dispatch])
 
   // Logged In
@@ -37,28 +40,34 @@ const Home = () => {
               </Link>
             )
           })}
-          <li className={styles.module_link}
+          {!revealForm &&
+            <li className={styles.module_link}
               title="Add a new module"
-              onClick={()=> setRevealForm(!revealForm)}
-            >Add Module
-          </li>
+              onClick={() => setRevealForm(!revealForm)}
+            >Add Module</li>
+          }
         </ul>
         {revealForm &&
-          <>
+          <div className={styles.new_mod_form}>
+            <i className={`fas fa-trash ${styles.new_mod_button}`}
+              onClick={() => setRevealForm(!revealForm)}
+            />
             <input
               type="text"
               value={name}
+              placeholder="New Mod"
+              className={styles.new_mod_input}
               onChange={(e) => setName(e.target.value)}
             />
-            <i className={`fas fa-plus ${styles.module_add}`}
+            <i className={`fas fa-plus ${styles.new_mod_button}`}
               onClick={submitNewModule}
             />
 
-          </>
+          </div>
         }
       </div>
       <div className={styles.right_main}>
-        <h1 className={styles.error_feed_title}>Recent Errors</h1>
+        <h1 className={styles.error_feed_title}>Recent Errors {randomNum}</h1>
         <ul className={styles.error_list}>
           {Object.values(errors).sort((a, b) => {
             return b.id - a.id;
