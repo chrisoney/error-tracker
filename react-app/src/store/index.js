@@ -9,11 +9,13 @@ import thunk from 'redux-thunk';
 import sessionReducer from './session';
 import modalReducer from './modal';
 import moduleReducer from './module';
+import errorReducer from './error';
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   modal: modalReducer,
   modules: moduleReducer,
+  errors: errorReducer,
 })
 
 let enhancer;

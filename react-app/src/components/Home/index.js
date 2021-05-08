@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import styles from './home.module.css';
 
 import { fetchAllModules } from '../../store/module';
+import { fetchAllErrors } from '../../store/error'
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -12,7 +13,8 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(fetchAllModules())
-  }, [dispatch, user])
+    dispatch(fetchAllErrors())
+  }, [dispatch])
 
   // Logged In
   return (
