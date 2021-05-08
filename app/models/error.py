@@ -1,4 +1,5 @@
 from .db import db
+from .image import Image
 
 class Error(db.Model):
   __tablename__ = 'errors'
@@ -18,10 +19,16 @@ class Error(db.Model):
     back_populates="errors"
   )
 
+  images = db.relationship(
+    'Image',
+     primaryjoin="and_(Image.parent_type=='error', foreign(Image.parent_id)==Error.id)"
+  )
+
   def to_dict(self):
     return {
       "id": self.id,
       "title": self.title,
       "user": self.user.to_dict(),
-      "module": self.module.to_dict()
+      "module": self.module.to_dict(),
+      "images": [image.url for image in self.images]
     }

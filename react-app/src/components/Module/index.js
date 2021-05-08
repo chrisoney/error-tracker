@@ -8,10 +8,6 @@ const Home = () => {
   const modules = useSelector(state => state.modules)
   const [module, setModule] = useState({})
 
-  Object.values(modules).forEach(module => {
-      console.log(id)
-      console.log(module)
-  })
   return (
     <>
       <h1>mod page: {id}</h1>

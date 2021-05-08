@@ -30,12 +30,10 @@ export const fetchAllModules = () => async dispatch => {
 export default function reducer(
   state = { }, action
 ) {
-  console.log("HIT HIT HIT HIT HIT")
   switch (action.type) {
     case GET_MODULES:
       return { ...state, ...action.payload}
     default:
-      console.log('WHAT ABOUT THIS HUH')
       return state;
   }
 }

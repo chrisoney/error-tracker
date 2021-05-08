@@ -30,13 +30,10 @@ export const fetchAllErrors = () => async dispatch => {
 export default function reducer(
   state = { }, action
 ) {
-  console.log("HIT HIT HIT HIT HIT")
   switch (action.type) {
     case GET_ERRORS:
-      console.log('------------------TADOW-----------------')
       return { ...state, ...action.payload}
     default:
-      console.log('WHAT ABOUT THIS HUH')
       return state;
   }
 }

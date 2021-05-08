@@ -1,5 +1,5 @@
 from .db import db
-from .subscriptions import subscriptions
+from .subscription import subscriptions
 
 class Module(db.Model):
   __tablename__ = 'modules'
