@@ -10,8 +10,11 @@ import User from "./components/User";
 import Home from './components/Home';
 import Splash from './components/Splash';
 import Module from './components/Module';
+import Modal from './components/Modal';
 
 import { authenticate } from './store/session';
+import { fetchAllModules } from './store/module';
+import { fetchAllErrors } from './store/error';
 
 function App() {
   const dispatch = useDispatch();
@@ -23,11 +26,14 @@ function App() {
 
   useEffect(() => {
     dispatch(authenticate())
+    dispatch(fetchAllModules())
+    dispatch(fetchAllErrors())
   }, [dispatch]);
 
   return (
     <BrowserRouter>
-      <NavBar  />
+      <NavBar />
+      <Modal />
       <Switch>
         <Route path="/" exact={true}>
           <Splash />
