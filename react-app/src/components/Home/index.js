@@ -3,13 +3,19 @@ import { NavLink, Redirect, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'
 import styles from './home.module.css';
 
-import { fetchAllModules } from '../../store/module';
+import { fetchAllModules, addNewModule } from '../../store/module';
 import { fetchAllErrors } from '../../store/error'
 
 const Home = () => {
   const dispatch = useDispatch();
-  const user = useSelector(state => state.session.user)
   const modules = useSelector(state => state.modules)
+  const errors = useSelector(state => state.errors)
+  const [name, setName] = useState('')
+  const [revealForm, setRevealForm] = useState(false)
+
+  function submitNewModule(){
+    dispatch(addNewModule(name))
+  }
 
   useEffect(() => {
     dispatch(fetchAllModules())
@@ -19,15 +25,67 @@ const Home = () => {
   // Logged In
   return (
     <div className={styles.home_container}>
-      <ul>
-        {Object.values(modules).map(module => {
-          return (
-            <Link key={module.id} to={`/modules/${module.id}`}>
-              <li>{module.name}</li>
-            </Link>
-          )
-        })}
-      </ul>
+      <div className={styles.left_aside}>
+        <ul>
+          {Object.values(modules).map(module => {
+            return (
+              <Link
+                key={module.id}
+                to={`/modules/${module.id}`}
+              >
+                <li className={styles.module_link}>{module.name}</li>
+              </Link>
+            )
+          })}
+          <li className={styles.module_link}
+              title="Add a new module"
+              onClick={()=> setRevealForm(!revealForm)}
+            >Add Module
+          </li>
+        </ul>
+        {revealForm &&
+          <>
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+            <i className={`fas fa-plus ${styles.module_add}`}
+              onClick={submitNewModule}
+            />
+
+          </>
+        }
+      </div>
+      <div className={styles.right_main}>
+        <h1 className={styles.error_feed_title}>Recent Errors</h1>
+        <ul className={styles.error_list}>
+          {Object.values(errors).sort((a, b) => {
+            return b.id - a.id;
+          }).map(error => {
+            return (
+              <li
+                className={styles.error_container}
+                key={error.id}
+              >
+                <span className={styles.error_title}>{error.title}</span>
+                <span className={styles.error_desc}>{error.description}</span>
+                <div className={styles.img_container}>
+                  {error.images.map((image, idx) => {
+                    return (
+                      <img
+                        key={idx}
+                        className={styles.err_img}
+                        src={image}
+                      />
+                    )
+                  })}
+                </div>
+              </li>
+            )
+          })}
+        </ul>
+      </div>
     </div>
   );
   

@@ -27,12 +27,28 @@ export const fetchAllModules = () => async dispatch => {
   if (!data.errors) dispatch(getAllModules(data.modules));
 }
 
+export const addNewModule = (name) => async dispatch => {
+  const formData = new FormData();
+  formData.append('name', name);
+  console.log(name)
+  const response = await fetch('/api/modules/', {
+    method: 'POST',
+    body: formData,
+  })
+  const data = await response.json();
+  if (!data.errors) dispatch(addModule(data.module));
+}
+
 export default function reducer(
   state = { }, action
 ) {
   switch (action.type) {
     case GET_MODULES:
-      return { ...state, ...action.payload}
+      return { ...state, ...action.payload }
+    case ADD_MODULE:
+      const newState = { ...state }
+      newState[action.payload.id] = action.payload;
+      return newState;
     default:
       return state;
   }
