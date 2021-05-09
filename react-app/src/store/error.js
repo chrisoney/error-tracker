@@ -28,23 +28,21 @@ export const fetchAllErrors = () => async dispatch => {
   return
 }
 
-export const addNewError = (title, description, user_id, module_id) => async dispatch => {
+export const addNewError = (title, description, user_id, module_id, images) => async dispatch => {
+  const formData = new FormData()
+  formData.append('title', title)
+  formData.append('description', description)
+  formData.append('user_id', user_id)
+  formData.append('module_id', module_id)
+
+  images.forEach((img) => formData.append('images[]', img))
   const response = await fetch('/api/errors/', {
-    method: 'POST',
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      title,
-      description,
-      user_id,
-      module_id
-    }),
+    method: "POST",
+    body: formData
   })
   const data = await response.json();
   if (data.errors) {
     const err = new Error('Unauthorized');
-    console.log(data.errors)
     err.errors = data.errors;
     throw err;
   } else dispatch(addError(data.error));

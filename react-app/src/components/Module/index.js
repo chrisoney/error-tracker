@@ -14,7 +14,7 @@ const Home = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const errors = useSelector(state => state.errors)
-
+  
   const showImage = (e) => {
     dispatch(setCurrent(ImagePopup));
     dispatch(setProps({imageSrc: e.target.src }))

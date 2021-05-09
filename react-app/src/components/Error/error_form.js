@@ -13,17 +13,28 @@ const ErrorForm = (props) => {
   const [errors, setErrors] = useState([]);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [images, setImages] = useState([]);
+  const [imageUrls, setImageUrls] = useState([]);
+  const [imageLoading, setImageLoading] = useState(false);
 
-  const onLogin = async (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
+    setImageLoading(true);
     dispatch(addNewError(
       title,
       description,
       user.id,
-      parseInt(module_id)
+      parseInt(module_id),
+      images
     ))
-    .then(() => dispatch(closeModal()))
-    .catch(err => setErrors(err.errors));
+      .then(() => {
+        setImageLoading(false);
+        dispatch(closeModal())
+      })
+      .catch(err => {
+        setImageLoading(false);
+        setErrors(err.errors)
+      });
   };
 
   const updateTitle = (e) => {
@@ -34,9 +45,15 @@ const ErrorForm = (props) => {
     setDescription(e.target.value);
   };
 
+  const updateImages = (e) => {
+    const file = e.target.files[0];
+    const url = URL.createObjectURL(file)
+    setImageUrls([...imageUrls, url])
+    setImages([...images, file]);
+}
 
   return (
-    <form className={styles.form} onSubmit={onLogin}>
+    <form className={styles.form} onSubmit={onSubmit}>
       <div>
         {errors.map((error, idx) => (
           <div className={styles.error} key={idx}>{error}</div>
@@ -60,8 +77,18 @@ const ErrorForm = (props) => {
           value={description}
           onChange={updateDescription}
         />
-        <button type="submit">Submit</button>
       </div>
+      {imageUrls.map((image, idx) => {
+        return <img key={idx} className={styles.preview_image} src={image} />
+      })}
+      <input
+        type="file"
+        accept="image/*"
+        multiple
+        onChange={updateImages}
+      />
+      {(imageLoading)&& <p>Loading...</p>}
+      <button type="submit">Submit</button>
     </form>
   );
 };
