@@ -20,6 +20,10 @@ class User(db.Model, UserMixin):
     "Error", 
     back_populates="user"
   )
+  answers = db.relationship(
+    "Answer", 
+    back_populates="user"
+  )
 
 
   @property
@@ -40,5 +44,7 @@ class User(db.Model, UserMixin):
     return {
       "id": self.id,
       "username": self.username,
-      "email": self.email
+      "email": self.email,
+      "error_ids": [error.id for error in self.errors],
+      "answer_ids": [answer.id for answer in self.answers]
     }

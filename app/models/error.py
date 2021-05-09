@@ -18,6 +18,10 @@ class Error(db.Model):
     "Module", 
     back_populates="errors"
   )
+  answers = db.relationship(
+    "Answer", 
+    back_populates="error"
+  )
 
   images = db.relationship(
     'Image',

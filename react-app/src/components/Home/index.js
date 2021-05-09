@@ -8,6 +8,7 @@ import ImagePopup from '../Modal/image_popup';
 
 import { fetchAllModules, addNewModule } from '../../store/module';
 import { fetchAllErrors } from '../../store/error'
+import { fetchAllAnswers } from '../../store/answer'
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -30,6 +31,8 @@ const Home = () => {
   useEffect(() => {
     dispatch(fetchAllModules())
     dispatch(fetchAllErrors())
+    dispatch(fetchAllAnswers())
+    
     setRandomNum(Math.floor(Math.random() * 100))
 
   }, [dispatch])
