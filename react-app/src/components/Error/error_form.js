@@ -60,9 +60,9 @@ const ErrorForm = (props) => {
         ))}
       </div>
       <div>
-        <label htmlFor="title">Title</label>
         <input
           name="title"
+          className={styles.title}
           type="text"
           placeholder="Title"
           value={title}
@@ -70,25 +70,47 @@ const ErrorForm = (props) => {
         />
       </div>
       <div>
-        <label htmlFor="description">Description</label>
         <textarea
           name="description"
           placeholder="Description"
+          className={styles.description}
           value={description}
           onChange={updateDescription}
         />
       </div>
-      {imageUrls.map((image, idx) => {
-        return <img key={idx} className={styles.preview_image} src={image} />
-      })}
-      <input
+      <div className={styles.image_container}>
+        {imageUrls.map((image, idx) => {
+          return <img key={idx} className={styles.preview_image} src={image}/>
+        })}
+      </div>
+      {(imageLoading) && <p className={styles.loading}>Loading...</p>}
+      <label htmlFor="upload-box" className="upload-label-box">
+        <div className={styles.upload_container}>
+          <div className={`${styles.camera_icon} fas fa-camera`} />
+          <div className={styles.image_label}>Add images</div>
+        </div>
+        <input
+          className={styles.upload_input}
+          type="file"
+          accept="image/*"
+          id="upload-box"
+          value=""
+          onChange={updateImages}
+          multiple
+        />
+      </label>
+      {/* <input
+        className={styles.image_upload_input}
         type="file"
         accept="image/*"
         multiple
         onChange={updateImages}
-      />
-      {(imageLoading)&& <p>Loading...</p>}
-      <button type="submit">Submit</button>
+      /> */}
+      <div className={styles.button_container}>
+        <button className={styles.form_button} type="submit">
+          Submit
+        </button>
+      </div>
     </form>
   );
 };
