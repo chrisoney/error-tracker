@@ -28,8 +28,8 @@ const Home = () => {
   };
 
   useEffect(() => {
-    // dispatch(fetchAllModules())
-    // dispatch(fetchAllErrors())
+    dispatch(fetchAllModules())
+    dispatch(fetchAllErrors())
     setRandomNum(Math.floor(Math.random() * 100))
 
   }, [dispatch])

@@ -26,8 +26,6 @@ function App() {
 
   useEffect(() => {
     dispatch(authenticate())
-    dispatch(fetchAllModules())
-    dispatch(fetchAllErrors())
   }, [dispatch]);
 
   return (

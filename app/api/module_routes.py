@@ -22,7 +22,6 @@ def add_new():
     Adds a new module
     """
     form = ModuleForm()
-    print('--------------------------')
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         module = Module( name=form.data['name'] )

@@ -30,7 +30,6 @@ export const fetchAllModules = () => async dispatch => {
 export const addNewModule = (name) => async dispatch => {
   const formData = new FormData();
   formData.append('name', name);
-  console.log(name)
   const response = await fetch('/api/modules/', {
     method: 'POST',
     body: formData,
