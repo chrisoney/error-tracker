@@ -13,6 +13,7 @@ import Module from './components/Module';
 import Modal from './components/Modal';
 
 import { authenticate } from './store/session';
+import { fetchAllMessages } from './store/message';
 import { fetchAllModules } from './store/module';
 import { fetchAllErrors } from './store/error';
 
@@ -26,6 +27,7 @@ function App() {
 
   useEffect(() => {
     dispatch(authenticate())
+    // dispatch(fetchAllMessages())
   }, [dispatch]);
 
   return (

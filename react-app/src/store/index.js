@@ -11,6 +11,7 @@ import modalReducer from './modal';
 import moduleReducer from './module';
 import errorReducer from './error';
 import answerReducer from './answer';
+import messageReducer from './message';
 
 const rootReducer = combineReducers({
   session: sessionReducer,
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   modules: moduleReducer,
   errors: errorReducer,
   answers: answerReducer,
+  messages: messageReducer,
 })
 
 let enhancer;

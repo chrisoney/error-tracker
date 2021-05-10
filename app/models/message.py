@@ -9,12 +9,14 @@ class Message(db.Model):
   recipient_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 
   sender = db.relationship(
-    "User", 
+    "User",
+    foreign_keys=[sender_id],
     back_populates="messages_sent"
   )
 
   recipient = db.relationship(
     "User",
+    foreign_keys=[recipient_id],
     back_populates="messages_recieved"
   )
 

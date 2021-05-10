@@ -2,6 +2,7 @@ from .db import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from .subscription import subscriptions
+from .message import Message
 
 class User(db.Model, UserMixin):
   __tablename__ = 'users'
@@ -27,10 +28,12 @@ class User(db.Model, UserMixin):
 
   messages_sent = db.relationship(
     "Message",
+    foreign_keys=[Message.sender_id],
     back_populates="sender"
   )
   messages_recieved = db.relationship(
     "Message",
+    foreign_keys=[Message.recipient_id],
     back_populates="recipient"
   )
 
