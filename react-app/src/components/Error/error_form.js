@@ -36,6 +36,26 @@ const ErrorForm = (props) => {
         setErrors(err.errors)
       });
   };
+  
+  const handleDragEnter = e => {
+    e.preventDefault();
+    e.target.classList.add(styles.file_hover);
+  };
+
+  const handleDragOver = e => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = "move";
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    const files = [...e.dataTransfer.files];
+    const urls = files.map(file => URL.createObjectURL(file));
+    setImageUrls([...imageUrls, ...urls])
+    setImages([...images, ...files]);
+
+  };
+
 
   const updateTitle = (e) => {
     setTitle(e.target.value);
@@ -84,10 +104,16 @@ const ErrorForm = (props) => {
         })}
       </div>
       {(imageLoading) && <p className={styles.loading}>Loading...</p>}
-      <label htmlFor="upload-box" className="upload-label-box">
+      <label
+        htmlFor="upload-box"
+        className="upload-label-box"
+        onDrop={(e) => handleDrop(e)}
+        onDragOver={e => handleDragOver(e)}
+        onDragEnter={e => handleDragEnter(e)}
+      >
         <div className={styles.upload_container}>
           <div className={`${styles.camera_icon} fas fa-camera`} />
-          <div className={styles.image_label}>Add images</div>
+          <div className={styles.image_label}>Drag and drop or click here to select image files</div>
         </div>
         <input
           className={styles.upload_input}

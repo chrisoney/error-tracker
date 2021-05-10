@@ -31,7 +31,7 @@ const Home = () => {
   useEffect(() => {
     dispatch(fetchAllModules())
     dispatch(fetchAllErrors())
-    dispatch(fetchAllAnswers())
+    // dispatch(fetchAllAnswers())
     
     setRandomNum(Math.floor(Math.random() * 100))
 

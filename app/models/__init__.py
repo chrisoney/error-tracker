@@ -5,3 +5,4 @@ from .module import Module
 from .image import Image
 from .error import Error
 from .answer import Answer
+from .message import Message

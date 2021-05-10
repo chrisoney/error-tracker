@@ -25,6 +25,14 @@ class User(db.Model, UserMixin):
     back_populates="user"
   )
 
+  messages_sent = db.relationship(
+    "Message",
+    back_populates="sender"
+  )
+  messages_recieved = db.relationship(
+    "Message",
+    back_populates="recipient"
+  )
 
   @property
   def password(self):

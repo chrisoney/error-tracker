@@ -48,6 +48,10 @@
   align-items: center;
 }
 
+.upload_container.file_hover {
+  background-color: #666;
+}
+
 .camera_icon {
   margin-bottom: 5px;
   font-size: 30px;
