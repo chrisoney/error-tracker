@@ -4,7 +4,7 @@ class Message(db.Model):
   __tablename__ = 'messages'
 
   id = db.Column(db.Integer, primary_key = True)
-  body = db.Column(db.Text, nullable = False, unique = True)
+  body = db.Column(db.Text, nullable = False)
   sender_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
   recipient_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 
@@ -25,6 +25,8 @@ class Message(db.Model):
       "id": self.id,
       "body": self.body,
       "sender_id": self.sender_id,
-      "recipient_id": self.recipient_id
+      "recipient_id": self.recipient_id,
+      "sender_username": self.sender.username,
+      "recipient_username": self.recipient.username,
     }
 

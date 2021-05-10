@@ -50,7 +50,6 @@ def that():
   form = ErrorForm()
   form['csrf_token'].data = request.cookies['csrf_token']
   if form.validate_on_submit():
-
       error = Error( 
         title=form.data['title'],
         description=form.data['description'],
