@@ -38,17 +38,12 @@ const Chat = (props) => {
     const filteredMessages = oldMessages.filter(msg => {
       return msg.sender_id === id || msg.recipient_id === id
     }).map((msg) => {
-      console.log(msg.sender_id, id)
-      console.log(msg.sender_username, msg.recipient_username)
-      console.log(msg.sender_id === id ?
-        msg.sender_username : msg.recipient_username,)
       return {
         user: msg.sender_username,
         msg: msg.body
       }
     })
-    console.log(filteredMessages)
-    setMessages([...filteredMessages, ...messages])
+    setMessages([...filteredMessages])
   }, [oldMessages])
 
 

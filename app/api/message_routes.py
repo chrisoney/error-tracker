@@ -21,6 +21,7 @@ def messages():
     """
     Queries for and returns all messages
     """
+    print("-------------", current_user, "----------------")
     messages = Message.query.all()
     return {
       "messages": [message.to_dict() for message in messages

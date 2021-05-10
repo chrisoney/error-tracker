@@ -31,7 +31,8 @@ export const createNewMessage = (body, recipientId) => async dispatch => {
     const err = new Error('Error with Messages');
     err.errors = data.errors;
     throw err;
-  } else dispatch(addMessage(data.message));
+  }
+  // else dispatch(addMessage(data.message));
   return
 }
 
