@@ -18,14 +18,20 @@ const Chat = (props) => {
   useEffect(() => {
     // open socket connection
     // create websocket
-    socket = io();
-   
+    socket = io("/private");
+    // socket.on("join", (data))
+    socket.on('connect', function() {
+      socket.emit('connected', { userId: user.id})
+    });
     socket.on("chat", (chat) => {
       setMessages(messages => [...messages, chat])
     })
     // when component unmounts, disconnect
     return (() => {
-      socket.disconnect()
+      socket.disconnect("/private")
+      socket.on('disconnect', function() {
+        socket.emit('disconnected', { userId: user.id})
+      });
     })
   }, [])
 
@@ -53,8 +59,8 @@ const Chat = (props) => {
 
   const sendChat = (e) => {
     e.preventDefault()
-    dispatch(createNewMessage(chatInput, props.id))
-    socket.emit("chat", { user: user.username, msg: chatInput });
+    // dispatch(createNewMessage(chatInput, props.id))
+    socket.emit("chat", { senderId: user.id, recipientId: id, user: user.username, msg: chatInput });
     setChatInput("")
   }
 
