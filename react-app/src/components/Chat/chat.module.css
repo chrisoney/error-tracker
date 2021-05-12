@@ -7,6 +7,10 @@
   z-index: 1;
 }
 
-.user_list {
+.user_list_user_container {
+  display: flex;
+}
 
+.online {
+  color: green;
 }
