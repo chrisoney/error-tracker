@@ -13,6 +13,7 @@ const ChatContainer = () => {
   const [open, setOpen] = useState([]);
   const [online, setOnline] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
+  const [listReveal, setListReveal] = useState(false);
 
   const [chatInput, setChatInput] = useState("");
   const oldMessages = useSelector(state => state.messages.messages);
@@ -50,6 +51,7 @@ const ChatContainer = () => {
   }, [dispatch])
 
   useEffect(() => {
+
     const filteredMessages = oldMessages.filter(msg => {
       return msg.sender_id === selectedUser || msg.recipient_id === selectedUser
     }).map((msg) => {
@@ -82,41 +84,17 @@ const ChatContainer = () => {
   }
 
   function openNewChat(e, user) {
+    const ids = open.map(user => user.id)
     e.preventDefault();
-    setOpen([...open, user]);
+    if (ids.includes(user.id)) {
+      const idx = ids.indexOf(user.id);
+      setOpen([...open.slice(0,idx), ...open.slice(idx+1, open.length)])
+    } else {
+      setOpen([...open, user]);
+    }
   }
 
-  // const openChats = open.map((user, idx) => {
-  //   return (
-  //     <>
-  //       <div key={`open-chat-${idx}`} className={styles.open_chat_container}>
-  //         <div className={styles.open_chat_username}>
-  //           {user.username}
-  //         </div>
-  //         {user.id === selectedUser
-  //           ? (<div className={styles.solo_chat_container}>
-  //             <div className={styles.message_container}>
-  //               {messages.map((msg, idx) => (
-  //                 <div
-  //                   className={styles.msg}
-  //                   key={idx}
-  //                 >{`${msg.user}: ${msg.msg}`}</div>
-  //               ))}
-  //             </div>
-  //             <form onSubmit={sendChat}>
-  //               <input
-  //                 value={chatInput}
-  //                 onChange={updateChatInput}
-  //               />
-  //               <button type="submit">Send</button>
-  //             </form>
-  //             </div>)
-  //           : null}
-  //       </div>
-  //     </>
-  //   )
-  // })
-
+  // Generating user list
   const userList = users.map((user) => {
     if (user.id !== sessionUser.id) return (
       <li
@@ -124,7 +102,8 @@ const ChatContainer = () => {
         onClick={(e) => openNewChat(e, user)}
         className={styles.user_list_user_container}
       >
-        <i className={`fas fa-circle ${online.includes(user.id) ? styles.online: ''}`} />
+        <i className={`fas fa-circle ${styles.status} ${online.includes(user.id)
+          ? styles.online : ''}`} />
         <div>{user.username}</div>
       </li>
     );
@@ -132,11 +111,51 @@ const ChatContainer = () => {
 
   return (
     <div className={styles.chat_container}>
-      {/* {openChats} */}
+      <div className={styles.open_chats_container}>
+        {open.map((user, idx) => {
+          return (
+            <div
+              key={`open-chat-${idx}`}
+              className={styles.open_chat_container}
+            >
+              <div
+                className={styles.open_chat_username}
+                onClick={() => setSelectedUser(selectedUser === user.id
+                  ? null : user.id)}
+              >
+                {user.username}
+              </div>
+              {user.id === selectedUser
+                ? (<div className={styles.solo_chat_container}>
+                    <div className={styles.message_container}>
+                      {messages.map((msg, idx) => (
+                        <div
+                          className={styles.msg}
+                          key={idx}
+                        >{`${msg.user}: ${msg.msg}`}</div>
+                      ))}
+                    </div>
+                    <form onSubmit={sendChat}>
+                      <input
+                        value={chatInput}
+                        onChange={updateChatInput}
+                      />
+                      <button type="submit">Send</button>
+                    </form>
+                  </div>)
+                : null}
+            </div>
+        )
+      })}
+      </div>
       <div className={styles.user_list_container}>
-        <ul className={styles.user_list}>
+        <div
+          className={styles.user_list_label}
+          onClick={() => setListReveal(!listReveal)}
+        >User List</div>
+        {listReveal && <ul className={styles.user_list}>
           {userList}
-        </ul>
+        </ul>}
       </div>
     </div>
   )
