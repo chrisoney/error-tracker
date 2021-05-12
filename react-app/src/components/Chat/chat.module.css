@@ -18,9 +18,17 @@
   cursor: pointer;
   width: 100px;
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
   color: white;
+}
+
+.user_list_label.close {
+  justify-content: flex-end;
+}
+
+.user_list_label.open {
+  justify-content: flex-start;
 }
 
 .user_list {
@@ -38,6 +46,12 @@
   align-items: center;
   padding: 5px;
   cursor: pointer;
+  border-bottom: 1px solid black;
+  text-overflow: ellipsis;
+}
+
+.user_list_user_container:last-of-type {
+  border-bottom: none;
 }
 
 .status {
@@ -51,6 +65,7 @@
 
 .open_chat_username {
   cursor: pointer;
+  background-color: white;
 }
 
 .open_chats_container {
@@ -65,8 +80,29 @@
 
 .solo_chat_container {
   position: absolute;
-  height: 200px;
+  height: 400px;
   max-height: 200px;
   bottom: 50px;
+  width: 200px;
   background-color: rgba(46, 155, 19, 0.8);
+}
+
+.message_container {
+  display: flex;
+  flex-direction: column-reverse;
+  overflow-y: scroll;
+  max-height: 90%;
+}
+
+.chat_form {
+  position:absolute;
+  bottom: 0;
+  display: flex;
+}
+
+.chat_input {
+  width: 90%;
+}
+.chat_button {
+
 }

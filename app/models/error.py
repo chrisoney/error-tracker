@@ -25,7 +25,8 @@ class Error(db.Model):
 
   images = db.relationship(
     'Image',
-     primaryjoin="and_(Image.parent_type=='error', foreign(Image.parent_id)==Error.id)"
+     primaryjoin="and_(Image.parent_type=='error', foreign(Image.parent_id)==Error.id)",
+     lazy="dynamic"
   )
 
   def to_dict(self):

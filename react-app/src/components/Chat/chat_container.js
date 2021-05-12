@@ -35,7 +35,7 @@ const ChatContainer = () => {
       setOnline(Object.keys(data).map(key => parseInt(key)))
     })
     socket.on("chat", (chat) => {
-      setMessages(messages => [...messages, chat])
+      setMessages(messages => [chat, ...messages])
     })
 
     
@@ -54,7 +54,7 @@ const ChatContainer = () => {
 
   useEffect(() => {
 
-    const filteredMessages = oldMessages.filter(msg => {
+    const filteredMessages = oldMessages.reverse().filter(msg => {
       return msg.sender_id === selectedUser || msg.recipient_id === selectedUser
     }).map((msg) => {
       return {
@@ -130,21 +130,24 @@ const ChatContainer = () => {
               </div>
               {user.id === selectedUser
                 ? (<div className={styles.solo_chat_container}>
-                    <div className={styles.message_container}>
-                      {messages.map((msg, idx) => (
-                        <div
-                          className={styles.msg}
-                          key={idx}
-                        >{`${msg.user}: ${msg.msg}`}</div>
-                      ))}
-                    </div>
-                    <form onSubmit={sendChat}>
-                      <input
-                        value={chatInput}
-                        onChange={updateChatInput}
-                      />
-                      <button type="submit">Send</button>
-                    </form>
+                    {/* <div className={styles.chat_positioner}> */}
+                      <div className={styles.message_container}>
+                        {messages.map((msg, idx) => (
+                          <div
+                            className={styles.msg}
+                            key={idx}
+                          >{`${msg.user}: ${msg.msg}`}</div>
+                        ))}
+                      </div>
+                      <form onSubmit={sendChat} className={styles.chat_form}>
+                        <input
+                          value={chatInput}
+                          className={styles.chat_input}
+                          onChange={updateChatInput}
+                        />
+                        <button type="submit" className={styles.chat_button}>Send</button>
+                      </form>
+                    {/* </div> */}
                   </div>)
                 : null}
             </div>
@@ -153,10 +156,18 @@ const ChatContainer = () => {
       </div>
       <div className={styles.user_list_container}>
         <div
-          className={styles.user_list_label}
+          className={`${styles.user_list_label} 
+                      ${listReveal ? styles.close : styles.open}`}
           onClick={() => setListReveal(!listReveal)}
-        >User List</div>
+        >{listReveal
+            ? <i className={`${styles.list_exit} fas fa-times-circle`} />
+            : <div className={styles.list_open}>User List</div>}
+            </div>
         {listReveal && <ul className={styles.user_list}>
+          <div
+            onClick={() => setListReveal(!listReveal)}
+            className={styles.list_header}
+          >User List</div>
           {userList}
         </ul>}
       </div>
