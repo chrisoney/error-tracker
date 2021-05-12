@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { io } from 'socket.io-client';
-
 import { fetchAllMessages, createNewMessage } from '../../store/message';
 
 import styles from './chat.module.css';
 let socket;
 
 const Chat = (props) => {
+
   const id = parseInt(props.id);
-  const username = props.username
   const dispatch = useDispatch();
   const [chatInput, setChatInput] = useState("");
   const oldMessages = useSelector(state => state.messages.messages);
@@ -23,6 +22,9 @@ const Chat = (props) => {
     socket.on('connect', function() {
       socket.emit('connected', { userId: user.id})
     });
+    socket.on('connected', (data) => {
+      console.log(data)
+    })
     socket.on("chat", (chat) => {
       setMessages(messages => [...messages, chat])
     })
@@ -65,7 +67,7 @@ const Chat = (props) => {
   }
 
   return (user && (
-    <div className={styles.chat_container}>
+    <div className={styles.solo_chat_container}>
       <div className={styles.message_container}>
         {messages.map((msg, idx) => (
           <div

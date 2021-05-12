@@ -53,12 +53,12 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path="/home" exact={true} >
           <Home />
+          <ChatContainer />
         </ProtectedRoute>
         <ProtectedRoute path="/modules/:id" exact={true} >
           <Module />
         </ProtectedRoute>
       </Switch>
-      <ChatContainer />
     </BrowserRouter>
   );
 }

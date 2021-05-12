@@ -21,7 +21,8 @@ users = {}
 @socketio.on('connected', namespace="/private")
 def on_join(data):
     users[data["userId"]] = request.sid
-    print("joined", '--------------', users[data["userId"]])
+    print('--------------------')
+    emit('connected', users, broadcast=True)
 
 @socketio.on('disconnected', namespace="/private")
 def on_leave(data):
@@ -32,6 +33,7 @@ def on_leave(data):
 @socketio.on("chat", namespace="/private")
 def handle_chat(data):
     users[data["senderId"]] = request.sid
+    print('------------------', request.sid)
     emit("chat", data, room=request.sid)
     if data["recipientId"] in users:
         emit("chat", data, room=users[data["recipientId"]])

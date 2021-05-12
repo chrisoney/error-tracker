@@ -2,10 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Chat from '.';
 import styles from './chat.module.css';
+import { io } from 'socket.io-client';
+
+let socket;
+
 const ChatContainer = () => {
   const [users, setUsers] = useState([]);
   const [open, setOpen] = useState([]);
   const sessionUser = useSelector(state => state.session.user);
+
+  // socket = io("/private");
 
   useEffect(() => {
     async function fetchData() {
@@ -21,14 +27,14 @@ const ChatContainer = () => {
     setOpen([...open, user]);
   }
 
-  const openChats = open.map((user) => {
+  const openChats = open.map((user, idx) => {
     return (
       <>
-        <div className={styles.open_chat_container}>
+        <div key={`open-chat-${idx}`} className={styles.open_chat_container}>
           <div className={styles.open_chat_username}>
             {user.username}
           </div>
-          <Chat id={ user.id } username={ user.username } />
+          <Chat id={ user.id } />
         </div>
       </>
     )
