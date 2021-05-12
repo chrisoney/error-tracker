@@ -65,7 +65,8 @@
 
 .solo_chat_container {
   position: absolute;
-  bottom: 50px;
   height: 200px;
+  max-height: 200px;
+  bottom: 50px;
   background-color: rgba(46, 155, 19, 0.8);
 }

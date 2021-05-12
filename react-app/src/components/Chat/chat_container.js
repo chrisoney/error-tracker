@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Chat from '.';
 import styles from './chat.module.css';
@@ -37,6 +37,8 @@ const ChatContainer = () => {
     socket.on("chat", (chat) => {
       setMessages(messages => [...messages, chat])
     })
+
+    
     // when component unmounts, disconnect
     return (() => {
       socket.disconnect("/private")
@@ -67,7 +69,8 @@ const ChatContainer = () => {
     async function fetchData() {
       const response = await fetch("/api/users/");
       const responseData = await response.json();
-      setUsers(responseData.users);
+      const data = responseData.users;
+      setUsers(data);
     }
     fetchData();
   }, []);
@@ -78,7 +81,7 @@ const ChatContainer = () => {
 
   const sendChat = (e) => {
     e.preventDefault()
-    dispatch(createNewMessage(chatInput, selectedUser))
+    // dispatch(createNewMessage(chatInput, selectedUser))
     socket.emit("chat", { senderId: sessionUser.id, recipientId: selectedUser, user: sessionUser.username, msg: chatInput });
     setChatInput("")
   }
