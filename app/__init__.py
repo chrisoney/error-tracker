@@ -1,10 +1,13 @@
 import os
+import atexit
+
 from flask import Flask, render_template, request, session, redirect
 from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect, generate_csrf
 from flask_login import LoginManager
 from .socket import socketio
+from apscheduler.schedulers.background import BackgroundScheduler
 
 from .models import db, User
 from .api.user_routes import user_routes
@@ -29,6 +32,14 @@ login.login_view = 'auth.unauthorized'
 def load_user(id):
     return User.query.get(int(id))
 
+# cron = Scheduler(daemon=True)
+# cron.start()
+
+# @cron.interval_schedule(hours=1)
+# def job_function():
+#     # Do your work here
+# Shutdown your cron thread if the web process is stopped
+# atexit.register(lambda: cron.shutdown(wait=False))
 
 # Tell flask about our seed commands
 app.cli.add_command(seed_commands)

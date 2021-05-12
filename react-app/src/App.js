@@ -11,6 +11,7 @@ import Home from './components/Home';
 import Splash from './components/Splash';
 import Module from './components/Module';
 import Modal from './components/Modal';
+import ChatContainer from './components/Chat/chat_container';
 
 import { authenticate } from './store/session';
 import { fetchAllMessages } from './store/message';
@@ -57,6 +58,7 @@ function App() {
           <Module />
         </ProtectedRoute>
       </Switch>
+      <ChatContainer />
     </BrowserRouter>
   );
 }

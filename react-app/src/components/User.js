@@ -40,7 +40,7 @@ function User() {
           <strong>Email</strong> {user.email}
         </li>
       </ul>
-      <Chat id={ userId } username={ user.username } />
+      {/* <Chat id={ userId } username={ user.username } /> */}
     </>
   );
 }
