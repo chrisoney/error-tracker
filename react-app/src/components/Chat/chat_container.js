@@ -48,7 +48,7 @@ const ChatContainer = () => {
 
   useEffect(() => {
     dispatch(fetchAllMessages())
-  }, [dispatch])
+  }, [dispatch, selectedUser])
 
   useEffect(() => {
 
@@ -78,7 +78,7 @@ const ChatContainer = () => {
 
   const sendChat = (e) => {
     e.preventDefault()
-    // dispatch(createNewMessage(chatInput, props.id))
+    dispatch(createNewMessage(chatInput, selectedUser))
     socket.emit("chat", { senderId: sessionUser.id, recipientId: selectedUser, user: sessionUser.username, msg: chatInput });
     setChatInput("")
   }
