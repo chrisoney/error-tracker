@@ -3,8 +3,8 @@ import { NavLink, Redirect, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'
 import styles from './home.module.css';
 
-import { setCurrent, setProps, openModal } from '../../store/modal'
-import ImagePopup from '../Modal/image_popup';
+
+import ErrorPreview from '../Error/error_preview';
 
 import { fetchAllModules, addNewModule } from '../../store/module';
 import { fetchAllErrors } from '../../store/error'
@@ -22,11 +22,7 @@ const Home = () => {
     dispatch(addNewModule(name))
   }
 
-  const showImage = (e) => {
-    dispatch(setCurrent(ImagePopup));
-    dispatch(setProps({imageSrc: e.target.src }))
-    dispatch(openModal());
-  };
+
 
   useEffect(() => {
     dispatch(fetchAllModules())
@@ -89,20 +85,7 @@ const Home = () => {
                 className={styles.error_container}
                 key={error.id}
               >
-                <span className={styles.error_title}>{error.title}</span>
-                <span className={styles.error_desc}>{error.description}</span>
-                <div className={styles.img_container}>
-                  {error.images.map((image, idx) => {
-                    return (
-                      <img
-                        key={idx}
-                        className={styles.err_img}
-                        src={image}
-                        onClick={showImage}
-                      />
-                    )
-                  })}
-                </div>
+                <ErrorPreview error={error} />
               </li>
             )
           })}

@@ -66,7 +66,7 @@ def update_messages():
   return {'success' : 'updated'}
 
 @message_routes.route('/last', methods=['PUT'])
-# @login_required
+@login_required
 def update_last():
   """
   update the last message

@@ -76,21 +76,3 @@
 .error_container {
   margin-bottom: 20px;;
 }
-
-.error_title {
-  font-size: 18px;
-}
-
-.error_desc {
-  font-size: 16px;
-  margin-bottom: 10px;
-}
-
-.err_img {
-  width: 200px;
-  height: 150px;
-  object-fit: cover;
-  margin-right: 10px;
-  display: inline-block;
-  cursor: pointer;
-}
