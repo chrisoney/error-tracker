@@ -14,15 +14,16 @@ const ChatContainer = () => {
   const [online, setOnline] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
   const [listReveal, setListReveal] = useState(false);
-
+  
   const [chatInput, setChatInput] = useState("");
   const oldMessages = useSelector(state => state.messages.messages);
   const [messages, setMessages] = useState([]);
-
+  
   const sessionUser = useSelector(state => state.session.user);
-
+  
   // socket = io("/private");
-
+  const msgContainer = useRef(null); 
+  
   useEffect(() => {
     // open socket connection
     // create websocket
@@ -35,7 +36,9 @@ const ChatContainer = () => {
       setOnline(Object.keys(data).map(key => parseInt(key)))
     })
     socket.on("chat", (chat) => {
-      setMessages(messages => [chat, ...messages])
+      console.log(chat);
+      setMessages(messages => [...messages, chat])
+      msgContainer.current.scrollTop = msgContainer.current.scrollHeight;
     })
 
     
@@ -53,11 +56,11 @@ const ChatContainer = () => {
   }, [dispatch, selectedUser])
 
   useEffect(() => {
-
-    const filteredMessages = oldMessages.reverse().filter(msg => {
+    const filteredMessages = oldMessages.filter(msg => {
       return msg.sender_id === selectedUser || msg.recipient_id === selectedUser
     }).map((msg) => {
       return {
+        sender_id: msg.sender_id,
         user: msg.sender_username,
         msg: msg.body
       }
@@ -131,12 +134,14 @@ const ChatContainer = () => {
               {user.id === selectedUser
                 ? (<div className={styles.solo_chat_container}>
                     {/* <div className={styles.chat_positioner}> */}
-                      <div className={styles.message_container}>
+                    <div ref={msgContainer}
+                      className={styles.message_container}>
                         {messages.map((msg, idx) => (
                           <div
-                            className={styles.msg}
+                            className={`${styles.msg} 
+                              ${msg.sender_id === sessionUser.id ? styles.current_user :null}`}
                             key={idx}
-                          >{`${msg.user}: ${msg.msg}`}</div>
+                          >{msg.msg}</div>
                         ))}
                       </div>
                       <form onSubmit={sendChat} className={styles.chat_form}>
