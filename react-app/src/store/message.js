@@ -50,6 +50,21 @@ export const updateMessages = (ids) => async dispatch => {
   return
 }
 
+export const updateLastMessage = (senderId, recipientId) => async dispatch => {
+  const formData = new FormData()
+  formData.append('senderId', senderId)
+  formData.append('recipientId', recipientId)
+
+  const response = await fetch('/api/messages/last', {
+    method: 'PUT',
+    body: formData
+  })
+  if (response.ok) {
+    console.log('success')
+  } else console.log("fail lol")
+  return
+}
+
 export default function reducer(
   state = { messages: [] }, action
 ) {

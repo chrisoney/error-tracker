@@ -64,3 +64,17 @@ def update_messages():
     db.session.add(msg)
   db.session.commit()
   return {'success' : 'updated'}
+
+@message_routes.route('/last', methods=['PUT'])
+# @login_required
+def update_last():
+  """
+  update the last message
+  """
+  sender_id = request.form["senderId"]
+  recipient_id = request.form["recipientId"]
+  message = Message.query.filter_by(sender_id=sender_id, recipient_id=recipient_id).order_by(Message.id.desc()).first()
+  message.unread = False
+  db.session.add(message)
+  db.session.commit()
+  return {'Success': 'Updated'}

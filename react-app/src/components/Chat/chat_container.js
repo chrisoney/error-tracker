@@ -6,7 +6,8 @@ import { io } from 'socket.io-client';
 import {
   fetchAllMessages,
   createNewMessage,
-  updateMessages
+  updateMessages,
+  updateLastMessage
 } from '../../store/message';
 
 let socket;
@@ -48,6 +49,11 @@ const ChatContainer = () => {
     })
     socket.on("chat", (chat) => {
       setMessages(messages => [...messages, chat])
+      if (msgContainer.current) msgContainer.current.scrollTop = msgContainer.current.scrollHeight;
+      if (selectedUserRef.current === chat.recipientId) {
+        dispatch(updateLastMessage(chat.senderId, chat.recipientId))
+      }
+      //else?
       setNewAlerts(newAlerts => {
         const id = chat.senderId;
         if (selectedUserRef.current === id) return newAlerts
@@ -56,7 +62,6 @@ const ChatContainer = () => {
         temp[id]++
         return temp
       })
-      if (msgContainer.current) msgContainer.current.scrollTop = msgContainer.current.scrollHeight;
     })
 
     
@@ -150,7 +155,7 @@ const ChatContainer = () => {
     })
 
     setSelectedUser(selectedUser === id ? null : id)
-
+    // if (msgContainer.current) msgContainer.current.scrollTop = msgContainer.current.scrollHeight;
     const messages = oldMessages.filter(msg => msg.sender_id === id && msg.recipient_id === sessionUser.id && msg.unread)
     const ids = messages.map(msg => msg.id)
     console.log(ids)
