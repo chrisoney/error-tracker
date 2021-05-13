@@ -27,9 +27,14 @@ const ChatContainer = () => {
   
   // socket = io("/private");
   const msgContainer = useRef(null);
+  const selectedUserRef = useRef(selectedUser)
   const [newAlerts, setNewAlerts] = useState({})
   // const newAlerts = {};
   
+  useEffect(() => {
+    selectedUserRef.current = selectedUser
+  }, [selectedUser])
+
   useEffect(() => {
     // open socket connection
     // create websocket
@@ -45,7 +50,7 @@ const ChatContainer = () => {
       setMessages(messages => [...messages, chat])
       setNewAlerts(newAlerts => {
         const id = chat.senderId;
-        console.log(id)
+        if (selectedUserRef.current === id) return newAlerts
         const temp = {...newAlerts}
         if (!temp[id]) temp[id] = 0
         temp[id]++
@@ -129,7 +134,12 @@ const ChatContainer = () => {
   });
 
   function unreadCount(id) {
-    return oldMessages.filter(msg => (msg.sender_id === id || msg.recipient_id === id) && msg.unread).length;
+    if (id === selectedUser) return 0;
+    const messages = oldMessages.filter(msg => (msg.sender_id === id && msg.recipient_id === sessionUser.id) && msg.unread)
+    // console.log(messages)
+    const count = messages.length;
+    // console.log(count, newAlerts[id])
+    return count
   }
 
   function openChatMessages(id) {
@@ -138,10 +148,11 @@ const ChatContainer = () => {
       if (temp[id]) temp[id] = 0
       return temp
     })
-    
+
     setSelectedUser(selectedUser === id ? null : id)
 
-    const ids = oldMessages.filter(msg => msg.sender_id === id && msg.recipient_id === sessionUser.id && msg.unread).map(msg => msg.id)
+    const messages = oldMessages.filter(msg => msg.sender_id === id && msg.recipient_id === sessionUser.id && msg.unread)
+    const ids = messages.map(msg => msg.id)
     console.log(ids)
     dispatch(updateMessages(ids))
     dispatch(fetchAllMessages())
