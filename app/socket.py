@@ -32,7 +32,8 @@ def on_leave(data):
 # handle chat messages
 @socketio.on("chat", namespace="/private")
 def handle_chat(data):
-    users[data["senderId"]] = request.sid
+    # users[data["senderId"]] = request.sid
+    data['sender_id'] = data["senderId"]
     emit("chat", data, room=request.sid)
     if data["recipientId"] in users:
         emit("chat", data, room=users[data["recipientId"]])

@@ -3,7 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import Chat from '.';
 import styles from './chat.module.css';
 import { io } from 'socket.io-client';
-import { fetchAllMessages, createNewMessage } from '../../store/message';
+import {
+  fetchAllMessages,
+  createNewMessage,
+  updateMessages
+} from '../../store/message';
 
 let socket;
 
@@ -22,7 +26,9 @@ const ChatContainer = () => {
   const sessionUser = useSelector(state => state.session.user);
   
   // socket = io("/private");
-  const msgContainer = useRef(null); 
+  const msgContainer = useRef(null);
+
+  const newAlerts = {};
   
   useEffect(() => {
     // open socket connection
@@ -36,9 +42,10 @@ const ChatContainer = () => {
       setOnline(Object.keys(data).map(key => parseInt(key)))
     })
     socket.on("chat", (chat) => {
-      console.log(chat);
       setMessages(messages => [...messages, chat])
-      msgContainer.current.scrollTop = msgContainer.current.scrollHeight;
+      if (!newAlerts[chat.recipientId]) newAlerts[chat.recipientId] = 0
+      newAlerts[chat.recipientId] += 1;
+      if (msgContainer.current) msgContainer.current.scrollTop = msgContainer.current.scrollHeight;
     })
 
     
@@ -84,7 +91,7 @@ const ChatContainer = () => {
 
   const sendChat = (e) => {
     e.preventDefault()
-    // dispatch(createNewMessage(chatInput, selectedUser))
+    dispatch(createNewMessage(chatInput, selectedUser))
     socket.emit("chat", { senderId: sessionUser.id, recipientId: selectedUser, user: sessionUser.username, msg: chatInput });
     setChatInput("")
   }
@@ -115,6 +122,18 @@ const ChatContainer = () => {
     );
   });
 
+  function unreadCount(id) {
+    return oldMessages.filter(msg => (msg.sender_id === id || msg.recipient_id === id) && msg.unread).length;
+  }
+
+  function openChatMessages(id) {
+    setSelectedUser(selectedUser === id ? null : id)
+    const ids = oldMessages.filter(msg => msg.sender_id === id && msg.recipient_id === sessionUser.id && msg.unread).map(msg => msg.id)
+    console.log(ids)
+    dispatch(updateMessages(ids))
+    dispatch(fetchAllMessages())
+  }
+
   return (
     <div className={styles.chat_container}>
       <div className={styles.open_chats_container}>
@@ -126,10 +145,13 @@ const ChatContainer = () => {
             >
               <div
                 className={styles.open_chat_username}
-                onClick={() => setSelectedUser(selectedUser === user.id
-                  ? null : user.id)}
+                onClick={() => openChatMessages(user.id)}
               >
-                {user.username}
+                <span>{user.username}</span>
+                <span>
+                  {unreadCount(user.id) +
+                    (newAlerts[user.id] || 0)}
+                </span>
               </div>
               {user.id === selectedUser
                 ? (<div className={styles.solo_chat_container}>

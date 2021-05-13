@@ -49,3 +49,18 @@ def new_message():
     db.session.commit()
     return { "message": message.to_dict() }
   return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
+
+@message_routes.route('/update', methods=['PUT'])
+@login_required
+def update_messages():
+  """
+  update messages to read
+  """
+  ids = request.form.getlist("ids[]")
+  for id in ids:
+    msg = Message.query.get(id)
+    msg.unread = False
+    db.session.add(msg)
+  db.session.commit()
+  return {'success' : 'updated'}

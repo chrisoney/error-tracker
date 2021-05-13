@@ -36,6 +36,20 @@ export const createNewMessage = (body, recipientId) => async dispatch => {
   return
 }
 
+export const updateMessages = (ids) => async dispatch => {
+  const formData = new FormData()
+  ids.forEach((id) => formData.append('ids[]', id))
+
+  const response = await fetch('/api/messages/update', {
+    method: 'PUT',
+    body: formData
+  })
+  if (response.ok) {
+    console.log('success')
+  } else console.log("fail lol")
+  return
+}
+
 export default function reducer(
   state = { messages: [] }, action
 ) {
