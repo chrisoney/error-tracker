@@ -27,8 +27,8 @@ const ChatContainer = () => {
   
   // socket = io("/private");
   const msgContainer = useRef(null);
-
-  const newAlerts = {};
+  const [newAlerts, setNewAlerts] = useState({})
+  // const newAlerts = {};
   
   useEffect(() => {
     // open socket connection
@@ -43,8 +43,14 @@ const ChatContainer = () => {
     })
     socket.on("chat", (chat) => {
       setMessages(messages => [...messages, chat])
-      if (!newAlerts[chat.recipientId]) newAlerts[chat.recipientId] = 0
-      newAlerts[chat.recipientId] += 1;
+      setNewAlerts(newAlerts => {
+        const id = chat.senderId;
+        console.log(id)
+        const temp = {...newAlerts}
+        if (!temp[id]) temp[id] = 0
+        temp[id]++
+        return temp
+      })
       if (msgContainer.current) msgContainer.current.scrollTop = msgContainer.current.scrollHeight;
     })
 
@@ -127,7 +133,14 @@ const ChatContainer = () => {
   }
 
   function openChatMessages(id) {
+    setNewAlerts(newAlerts => {
+      const temp = {...newAlerts}
+      if (temp[id]) temp[id] = 0
+      return temp
+    })
+    
     setSelectedUser(selectedUser === id ? null : id)
+
     const ids = oldMessages.filter(msg => msg.sender_id === id && msg.recipient_id === sessionUser.id && msg.unread).map(msg => msg.id)
     console.log(ids)
     dispatch(updateMessages(ids))
