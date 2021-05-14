@@ -9,7 +9,7 @@ const Sidebar = () => {
   const dispatch = useDispatch();
   const modules = useSelector(state => state.modules);
   const [revealForm, setRevealForm] = useState(false);
-  const [selected, setSelected] = useState(null)
+  const [selected, setSelected] = useState(0)
   const [name, setName] = useState('')
 
   function submitNewModule(){
@@ -22,11 +22,22 @@ const Sidebar = () => {
     // dispatch(fetchAllMessages())
     
   }, [dispatch])
-  console.log(selected)
+
   return (
     <div className={styles.sidebar_container}>
       <div className={styles.modules_header}>Modules</div>
       <ul>
+        <Link
+          key={0}
+          className={styles.link_ele}
+          to={`/home`}
+          onClick={() => setSelected(0)}
+        >
+          <li
+            className={styles.module_link}
+          >All Modules</li>
+          {0 === selected ? <span className={styles.highlight}/>:""}
+        </Link>
         {Object.values(modules).map(module => {
           return (
             <Link
