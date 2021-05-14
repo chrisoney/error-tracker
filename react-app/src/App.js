@@ -12,7 +12,7 @@ import Splash from './components/Splash';
 import Module from './components/Module';
 import Modal from './components/Modal';
 import ChatContainer from './components/Chat/chat_container';
-
+import Sidebar from './components/Sidebar';
 import { authenticate } from './store/session';
 import { fetchAllMessages } from './store/message';
 import { fetchAllModules } from './store/module';
@@ -35,30 +35,33 @@ function App() {
     <BrowserRouter>
       <NavBar />
       <Modal />
-      <Switch>
-        <Route path="/" exact={true}>
-          <Splash />
-        </Route>
-        <Route path="/login" exact={true} render={(props) => <LoginForm {...props} />} />
-          {/* <LoginForm />
-        </Route> */}
-        <Route path="/sign-up" exact={true}>
-          <SignUpForm />
-        </Route>
-        <ProtectedRoute path="/users" exact={true} >
-          <UsersList/>
-        </ProtectedRoute>
-        <ProtectedRoute path="/users/:userId" exact={true} >
-          <User />
-        </ProtectedRoute>
-        <ProtectedRoute path="/home" exact={true} >
-          <Home />
-          {/* <ChatContainer /> */}
-        </ProtectedRoute>
-        <ProtectedRoute path="/modules/:id" exact={true} >
-          <Module />
-        </ProtectedRoute>
-      </Switch>
+      <div className="main-area">
+        {loaded && user && <Sidebar />}
+        <Switch>
+          <Route path="/" exact={true}>
+            <Splash />
+          </Route>
+          <Route path="/login" exact={true} render={(props) => <LoginForm {...props} />} />
+            {/* <LoginForm />
+          </Route> */}
+          <Route path="/sign-up" exact={true}>
+            <SignUpForm />
+          </Route>
+          <ProtectedRoute path="/users" exact={true} >
+            <UsersList/>
+          </ProtectedRoute>
+          <ProtectedRoute path="/users/:userId" exact={true} >
+            <User />
+          </ProtectedRoute>
+          <ProtectedRoute path="/home" exact={true} >
+            <Home />
+            {/* <ChatContainer /> */}
+          </ProtectedRoute>
+          <ProtectedRoute path="/modules/:id" exact={true} >
+            <Module />
+          </ProtectedRoute>
+        </Switch>
+      </div>
       {loaded && user && <ChatContainer />}
     </BrowserRouter>
   );

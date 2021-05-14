@@ -10,7 +10,7 @@ import ErrorForm from '../Error/error_form';
 
 import styles from './module.module.css';
 
-const Home = () => {
+const Module = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const errors = useSelector(state => state.errors)
@@ -32,7 +32,7 @@ const Home = () => {
   }, [dispatch])
 
   return (
-    <>
+    <div className={styles.module_page_container}>
       <h1>mod page: {id}</h1>
       <div className={styles.button_container}>
         <span>Back</span>
@@ -72,8 +72,8 @@ const Home = () => {
           })}
         </ul>
       </div>
-    </>
+    </div>
   )
 }
 
-export default Home;
+export default Module;

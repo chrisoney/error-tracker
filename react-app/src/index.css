@@ -60,3 +60,9 @@ table {
 	min-height: 100vh;
 	position: relative;
 }
+
+.main-area {
+	display: grid;
+	grid-template-columns: 164px 1fr;
+	min-height: 85vh;
+}

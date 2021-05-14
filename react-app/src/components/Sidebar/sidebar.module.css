@@ -1,0 +1,54 @@
+.sidebar_container {
+  padding-top: 20px;
+  height: 100%;
+  border-right: 1px solid black;
+}
+
+/* 
+.module_link {
+  color: white;
+  background-color: blue;
+  text-decoration: none;
+  border-radius: 5px;
+  padding: 10px 8px;
+  margin-bottom: 10px;
+  text-align: center;
+  cursor:pointer;
+  min-width: 100px;
+}
+
+.new_mod_form{
+  display:flex;
+  justify-content: center;
+}
+
+.new_mod_input{
+  border-right: none;
+  border-left: none;
+  border: 1px solid #666;
+  text-decoration: none;
+  width: 70%;
+}
+.new_mod_input::placeholder{
+  text-align: center;
+}
+
+.new_mod_input:focus{
+  outline: none;
+}
+
+.new_mod_button{
+  cursor: pointer;
+  color: #333;
+  background-color: #666;
+  padding: 5px;
+}
+
+.new_mod_button:first-of-type{
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.new_mod_button:last-of-type{
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+} */
