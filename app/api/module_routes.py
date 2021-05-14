@@ -28,13 +28,26 @@ def add_new():
         db.session.add(module)
         db.session.commit()
         return { "module": module.to_dict() }
-    return {'errors': form.errors}, 401
+    return {'errors': form.errors}, 400
 
 @module_routes.route('/<int:id>')
 @login_required
 def module(id):
     module = Module.query.get(id)
     return module.to_dict()
+
+@module_routes.route('/<int:id>', methods=['PUT'])
+@login_required
+def module(id):
+    form = ModuleForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        module = Module.query.get(id)
+        module.name = form.data['name'] )
+        db.session.add(module)
+        db.session.commit()
+        return { "module": module.to_dict() }
+    return {'errors': form.errors}, 400
 
 @module_routes.route('/<int:id>', methods=['DELETE'])
 @login_required
