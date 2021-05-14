@@ -4,19 +4,32 @@
   border-right: 1px solid black;
 }
 
-/* 
-.module_link {
-  color: white;
-  background-color: blue;
-  text-decoration: none;
-  border-radius: 5px;
-  padding: 10px 8px;
-  margin-bottom: 10px;
+.modules_header {
   text-align: center;
-  cursor:pointer;
-  min-width: 100px;
+  font-size: 22px;
+  border-bottom: 1px solid black;
+  padding-bottom: 10px;
 }
 
+.link_ele {
+  text-decoration: none;
+  color: black;
+  display: grid;
+  grid-template-columns: 1fr 10px;
+  border-bottom: 1px solid black;
+} 
+
+.module_link {
+  text-decoration: none;
+  padding: 10px 8px;
+  cursor:pointer;
+}
+
+.highlight {
+  display: block;
+  background-color: blue;
+}
+/*
 .new_mod_form{
   display:flex;
   justify-content: center;

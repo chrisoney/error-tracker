@@ -35,7 +35,7 @@ function App() {
     <BrowserRouter>
       <NavBar />
       <Modal />
-      <div className="main-area">
+      <div className={user ? "main-area" : ""}>
         {loaded && user && <Sidebar />}
         <Switch>
           <Route path="/" exact={true}>

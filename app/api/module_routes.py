@@ -32,18 +32,24 @@ def add_new():
 
 @module_routes.route('/<int:id>')
 @login_required
-def module(id):
+def get_module(id):
+    """
+    Get a single module's information
+    """
     module = Module.query.get(id)
     return module.to_dict()
 
 @module_routes.route('/<int:id>', methods=['PUT'])
 @login_required
-def module(id):
+def edit_module(id):
+    """
+    Edit the name of a module
+    """
     form = ModuleForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         module = Module.query.get(id)
-        module.name = form.data['name'] )
+        module.name = form.data['name']
         db.session.add(module)
         db.session.commit()
         return { "module": module.to_dict() }
@@ -51,7 +57,10 @@ def module(id):
 
 @module_routes.route('/<int:id>', methods=['DELETE'])
 @login_required
-def module(id):
+def delete_module(id):
+    """
+    Delete a module
+    """
     module = Module.query.get(id)
     db.session.delete(module)
     db.session.commit()
