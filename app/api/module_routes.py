@@ -30,8 +30,16 @@ def add_new():
         return { "module": module.to_dict() }
     return {'errors': form.errors}, 401
 
-# @module_routes.route('/<int:id>')
-# @login_required
-# def module(id):
-#     module = Module.query.get(id)
-#     return module.to_dict()
+@module_routes.route('/<int:id>')
+@login_required
+def module(id):
+    module = Module.query.get(id)
+    return module.to_dict()
+
+@module_routes.route('/<int:id>', methods=['DELETE'])
+@login_required
+def module(id):
+    module = Module.query.get(id)
+    db.session.delete(module)
+    db.session.commit()
+    return {'deleted': id}
