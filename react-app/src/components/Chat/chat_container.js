@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Chat from '.';
 import styles from './chat.module.css';
 import { io } from 'socket.io-client';
 import {
@@ -26,11 +25,9 @@ const ChatContainer = () => {
   
   const sessionUser = useSelector(state => state.session.user);
   
-  // socket = io("/private");
   const msgContainer = useRef(null);
   const selectedUserRef = useRef(selectedUser)
   const [newAlerts, setNewAlerts] = useState({})
-  // const newAlerts = {};
   
   useEffect(() => {
     selectedUserRef.current = selectedUser
@@ -40,13 +37,14 @@ const ChatContainer = () => {
     // open socket connection
     // create websocket
     socket = io("/private");
-    // socket.on("join", (data))
     socket.on('connect', function() {
       socket.emit('connected', { userId: sessionUser.id})
     });
     socket.on('connected', (data) => {
       setOnline(Object.keys(data).map(key => parseInt(key)))
     })
+
+    
     socket.on("chat", (chat) => {
       setMessages(messages => [...messages, chat])
       if (msgContainer.current) msgContainer.current.scrollTop = msgContainer.current.scrollHeight;
@@ -63,14 +61,18 @@ const ChatContainer = () => {
         return temp
       })
     })
-
+    socket.on('disconnect', (data) => {
+      console.log(data)
+      setOnline(Object.keys(data).map(key => parseInt(key)))
+    });
     
     // when component unmounts, disconnect
     return (() => {
-      socket.disconnect("/private")
-      socket.on('disconnect', function() {
-        socket.emit('disconnected', { userId: sessionUser.id})
-      });
+      console.log(sessionUser)
+      // socket.emit('disconnect', { userId: sessionUser.id})
+      // socket.on('disconnect', function() {
+      // });
+      socket.disconnect()
     })
   }, [])
 

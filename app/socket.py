@@ -1,5 +1,6 @@
 from flask import request
-from flask_socketio import SocketIO, emit, join_room, leave_room
+from flask_socketio import SocketIO, emit
+from flask_login import current_user
 import os
 from .models import User, db
 
@@ -21,13 +22,13 @@ users = {}
 @socketio.on('connected', namespace="/private")
 def on_join(data):
     users[data["userId"]] = request.sid
-    print('--------------------')
+    print(users)
     emit('connected', users, broadcast=True)
 
-@socketio.on('disconnected', namespace="/private")
-def on_leave(data):
-    users[data["userId"]] = null
-    print("left", '--------------', users[data["userId"]])
+@socketio.on('disconnect', namespace="/private")
+def on_leave():
+    del users[current_user.id]
+    emit('connected', users, broadcast=True)
 
 # handle chat messages
 @socketio.on("chat", namespace="/private")
