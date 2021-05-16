@@ -5,6 +5,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { openModal, setCurrent, setProps } from '../../store/modal';
 import { fetchAllModules } from '../../store/module';
 import { fetchAllErrors } from '../../store/error';
+import { changePage } from '../../store/ui';
+
 import ImagePopup from '../Modal/image_popup';
 import ErrorForm from '../Error/error_form';
 
@@ -30,6 +32,10 @@ const Module = () => {
     dispatch(fetchAllModules())
     dispatch(fetchAllErrors())
   }, [dispatch])
+
+  useEffect(() => {
+    dispatch(changePage(parseInt(id)))
+  }, [dispatch, id])
 
   return (
     <div className={styles.module_page_container}>

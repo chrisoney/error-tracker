@@ -7,8 +7,9 @@ import styles from './home.module.css';
 import ErrorPreview from '../Error/error_preview';
 
 import { fetchAllModules, addNewModule } from '../../store/module';
-import { fetchAllErrors } from '../../store/error'
-import { fetchAllMessages } from '../../store/message'
+import { fetchAllErrors } from '../../store/error';
+import { fetchAllMessages } from '../../store/message';
+import { changePage } from '../../store/ui';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -24,7 +25,7 @@ const Home = () => {
     // dispatch(fetchAllModules())
     dispatch(fetchAllErrors())
     // dispatch(fetchAllMessages())
-    
+    dispatch(changePage(0)) // Just 0 for now for home
     setRandomNum(Math.floor(Math.random() * 100))
 
   }, [dispatch])

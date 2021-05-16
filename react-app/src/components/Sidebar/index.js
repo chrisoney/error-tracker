@@ -8,6 +8,7 @@ import styles from './sidebar.module.css';
 const Sidebar = () => {
   const dispatch = useDispatch();
   const modules = useSelector(state => state.modules);
+  const page = useSelector(state => state.ui.page)
   const [revealForm, setRevealForm] = useState(false);
   const [selected, setSelected] = useState(0)
   const [name, setName] = useState('')
@@ -23,6 +24,10 @@ const Sidebar = () => {
     
   }, [dispatch])
 
+  useEffect(() => {
+    setSelected(page)
+  }, [page])
+
   return (
     <div className={styles.sidebar_container}>
       <div className={styles.modules_header}>Modules</div>
@@ -31,7 +36,7 @@ const Sidebar = () => {
           key={0}
           className={styles.link_ele}
           to={`/home`}
-          onClick={() => setSelected(0)}
+          // onClick={() => setSelected(0)}
         >
           <li
             className={styles.module_link}
@@ -44,7 +49,7 @@ const Sidebar = () => {
               key={module.id}
               className={styles.link_ele}
               to={`/modules/${module.id}`}
-              onClick={() => setSelected(module.id)}
+              // onClick={() => setSelected(module.id)}
             >
               <li
                 className={styles.module_link}

@@ -12,6 +12,7 @@ import moduleReducer from './module';
 import errorReducer from './error';
 import answerReducer from './answer';
 import messageReducer from './message';
+import uiReducer from './ui';
 
 const rootReducer = combineReducers({
   session: sessionReducer,
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   errors: errorReducer,
   answers: answerReducer,
   messages: messageReducer,
+  ui: uiReducer,
 })
 
 let enhancer;
