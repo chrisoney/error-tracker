@@ -18,6 +18,18 @@
   margin-bottom: 20px;
 }
 
+.error_list {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
 .error_container {
-  margin-bottom: 20px;;
+  margin-bottom: 20px;
+  margin-right: 10px;
+}
+
+@media only screen and (min-width: 1350px) {
+  .error_list {
+    grid-template-columns: 1fr 1fr;
+  }
 }

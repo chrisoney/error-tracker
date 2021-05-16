@@ -39,7 +39,7 @@ const ErrorPreview = ({error}) => {
       </div>
       <div className={styles.error_preview_footer}>
         <span className={styles.answer_count}>
-          {error.answers.length} notes
+          {error.answer_count} notes
         </span>
         <span className={styles.error_preview_read_more}>Read More...</span>
       </div>

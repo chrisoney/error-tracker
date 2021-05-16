@@ -68,21 +68,28 @@
 /* Error page */
 
 .single_error_preview_container {
-  background-color: rgba(165, 18, 18, 0.7);
+  /* background-color: rgba(165, 18, 18, 0.7); */
+  border: 1px solid black;
+  box-shadow: 3px 3px 2px 1px rgba(0,0,0, .2);
   display: flex;
   flex-direction: column;
   width: 540px;
+  padding: 10px 20px;
 }
 
 .error_preview_header {
-  padding: 10px 20px;
   display: flex;
   justify-content: space-between;
   font-size: 18px;
+  margin-bottom: 20px;
 }
 
 .error_previw_title {
   font-size: 18px;
+  max-width: 80%;
+}
+.error_previw_user {
+  font-size: 16px;
   max-width: 80%;
 }
 
@@ -91,12 +98,20 @@
 }
 
 .error_preview_body {
-  padding: 10px 20px;
+  /* padding: 10px 20px; */
+  margin-bottom: 20px;
 }
 
-.error_previw_desc {
+.error_preview_desc {
   font-size: 16px;
   margin-bottom: 10px;
+  height: 100px;
+  text-overflow: ellipsis;
+}
+
+.error_preview_footer {
+  display: flex;
+  justify-content: space-between;
 }
 
 .err_preview_img {

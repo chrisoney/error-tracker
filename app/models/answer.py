@@ -27,7 +27,7 @@ class Answer(db.Model):
     return {
       "id": self.id,
       "description": self.description,
-      "user": self.user.to_dict(),
-      "error": self.error.to_dict(),
+      "user_id": self.user.id,
+      "error_id": self.error.id,
       "images": [image.url for image in self.images]
     }
