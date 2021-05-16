@@ -17,7 +17,7 @@ const Home = () => {
   const errors = useSelector(state => state.errors)
   
  
-  const [randomNum, setRandomNum] = useState(null)
+  // const [randomNum, setRandomNum] = useState(null)
 
 
 
@@ -26,14 +26,14 @@ const Home = () => {
     dispatch(fetchAllErrors())
     // dispatch(fetchAllMessages())
     dispatch(changePage(0)) // Just 0 for now for home
-    setRandomNum(Math.floor(Math.random() * 100))
+    // setRandomNum(Math.floor(Math.random() * 100))
 
   }, [dispatch])
 
   // Logged In
   return (
     <div className={styles.home_container}>
-      <h1 className={styles.error_feed_title}>Recent Errors {randomNum}</h1>
+      <h1 className={styles.error_feed_title}>All Recent Errors</h1>
       <ul className={styles.error_list}>
         {Object.values(errors).sort((a, b) => {
           return b.id - a.id;

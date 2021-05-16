@@ -5,7 +5,7 @@ class Answer(db.Model):
   __tablename__ = 'answers'
 
   id = db.Column(db.Integer, primary_key = True)
-  description = db.Column(db.Text, nullable = False, unique = True)
+  description = db.Column(db.Text, nullable = False)
   user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
   error_id = db.Column(db.Integer, db.ForeignKey('errors.id'), nullable=False)
 

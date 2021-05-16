@@ -74,8 +74,24 @@
   width: 540px;
 }
 
+.error_preview_header {
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 18px;
+}
+
 .error_previw_title {
   font-size: 18px;
+  max-width: 80%;
+}
+
+.styles.error_preview_navigate {
+  font-size: 24px;
+}
+
+.error_preview_body {
+  padding: 10px 20px;
 }
 
 .error_previw_desc {

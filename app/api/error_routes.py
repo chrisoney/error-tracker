@@ -63,5 +63,6 @@ def that():
 
       db.session.commit()
       return { "error": error.to_dict() }
+  print(validation_errors_to_error_messages(form.errors))
   return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
