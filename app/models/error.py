@@ -36,5 +36,6 @@ class Error(db.Model):
       "description": self.description,
       "user": self.user.to_dict(),
       "module": self.module.to_dict(),
-      "images": [image.url for image in self.images]
+      "images": [image.url for image in self.images],
+      "answers": [answer.to_dict() for answer in self.answers]
     }

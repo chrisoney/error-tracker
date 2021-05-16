@@ -18,11 +18,13 @@ const ErrorPreview = ({error}) => {
     <div className={styles.single_error_preview_container}>
       <div className={styles.error_preview_header}>
         <span className={styles.error_preview_title}>{error.title}</span>
-        <i className={`fas fa-arrow-circle-right ${styles.error_preview_navigate}`}/>
+        <span className={styles.error_preview_user}>
+          Posted by: {error.user.username}
+        </span>
       </div>
       <div className={styles.error_preview_body}>
         <span className={styles.error_preview_desc}>{error.description}</span>
-        <div className={styles.error_previewimg_container}>
+        <div className={styles.error_preview_img_container}>
           {error.images.map((image, idx) => {
             return (
               <img
@@ -34,6 +36,12 @@ const ErrorPreview = ({error}) => {
             )
           })}
         </div>
+      </div>
+      <div className={styles.error_preview_footer}>
+        <span className={styles.answer_count}>
+          {error.answers.length} notes
+        </span>
+        <span className={styles.error_preview_read_more}>Read More...</span>
       </div>
     </div>
   )
