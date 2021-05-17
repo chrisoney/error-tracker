@@ -28,6 +28,13 @@ export const fetchAllAnswers = () => async dispatch => {
   return
 }
 
+export const fetchErrorAnswers = (id) => async dispatch => {
+  const response = await fetch(`/api/errors/${id}/answers`);
+  const data = await response.json();
+  if (!data.errors) dispatch(getAllAnswers(data.answers));
+  return
+};
+
 export const addNewAnswer = (description, user_id, error_id, images) => async dispatch => {
   const formData = new FormData()
   formData.append('description', description)
@@ -53,7 +60,7 @@ export default function reducer(
 ) {
   switch (action.type) {
     case GET_ANSWERS:
-      return { ...state, ...action.payload }
+      return { ...action.payload }
     case ADD_ANSWER:
       const newState = { ...state };
       newState[action.payload.id] = action.payload;

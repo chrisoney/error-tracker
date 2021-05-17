@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from app.models import db, Error, Image
+from app.models import db, Error, Image, Answer
 from app.forms import ErrorForm
 from app.s3_helpers import (
     upload_file_to_s3, allowed_file, get_unique_filename)
@@ -65,4 +65,14 @@ def that():
       return { "error": error.to_dict() }
   print(validation_errors_to_error_messages(form.errors))
   return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
+
+@error_routes.route('/<int:id>/answers')
+# @login_required
+def get_error_answers(id):
+  """
+  Sends back all of the answers for a certain error
+  """
+  answers = Answer.query.filter_by(error_id=id)
+  return {"answers": [answer.to_dict() for answer in answers]}
 
