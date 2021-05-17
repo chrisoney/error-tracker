@@ -11,6 +11,8 @@ import Home from './components/Home';
 import Splash from './components/Splash';
 import Module from './components/Module';
 import Modal from './components/Modal';
+import Error from './components/Error';
+
 import ChatContainer from './components/Chat/chat_container';
 import Sidebar from './components/Sidebar';
 import { authenticate } from './store/session';
@@ -59,6 +61,9 @@ function App() {
           </ProtectedRoute>
           <ProtectedRoute path="/modules/:id" exact={true} >
             <Module />
+          </ProtectedRoute>
+          <ProtectedRoute path="/errors/:id" exact={true} >
+            <Error />
           </ProtectedRoute>
         </Switch>
       </div>

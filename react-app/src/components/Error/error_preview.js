@@ -1,5 +1,6 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom';
 import styles from './error.module.css';
 
 import { setCurrent, setProps, openModal } from '../../store/modal'
@@ -17,7 +18,9 @@ const ErrorPreview = ({error}) => {
   return (
     <div className={styles.single_error_preview_container}>
       <div className={styles.error_preview_header}>
-        <span className={styles.error_preview_title}>{error.title}</span>
+        <Link to={`/errors/${error.id}`}>
+          <span className={styles.error_preview_title}>{error.title}</span>
+        </Link>
         <span className={styles.error_preview_user}>
           Posted by: {error.user.username}
         </span>
@@ -41,7 +44,9 @@ const ErrorPreview = ({error}) => {
         <span className={styles.answer_count}>
           {error.answer_count} notes
         </span>
-        <span className={styles.error_preview_read_more}>Read More...</span>
+        <Link to={`/errors/${error.id}`}>
+          <span className={styles.error_preview_read_more}>Read More...</span>
+        </Link>
       </div>
     </div>
   )
