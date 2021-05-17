@@ -67,6 +67,15 @@ def that():
   return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 
+@error_routes.route('/<int:id>')
+# @login_required
+def get_single_error(id):
+  """
+  Sends back error information
+  """
+  error = Error.query.get(id)
+  return {"error": error.to_dict() }
+
 @error_routes.route('/<int:id>/answers')
 # @login_required
 def get_error_answers(id):

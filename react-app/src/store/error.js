@@ -27,6 +27,16 @@ export const fetchAllErrors = () => async dispatch => {
   if (!data.errors) dispatch(getAllErrors(data.errorsArray));
   return
 }
+export const fetchSingleError = (id) => async dispatch => {
+  const response = await fetch(`/api/errors/${id}`,{
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+  const data = await response.json();
+  if (!data.errors) dispatch(addError(data.error));
+  return
+}
 
 export const addNewError = (title, description, user_id, module_id, images) => async dispatch => {
   const formData = new FormData()

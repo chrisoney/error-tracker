@@ -1,4 +1,4 @@
-
+/* New Error Modal */
 .form {
   width: 420px;
 }
@@ -65,7 +65,7 @@
   display:none;
 }
 
-/* Error page */
+/* Error Previews on other pages */
 
 .single_error_preview_container {
   /* background-color: rgba(165, 18, 18, 0.7); */
@@ -98,7 +98,6 @@
 }
 
 .error_preview_body {
-  /* padding: 10px 20px; */
   margin-bottom: 20px;
 }
 
@@ -122,6 +121,14 @@
   display: inline-block;
   cursor: pointer;
 }
+
+/* Error Page Styling */
+
+
+
+
+
+/* Different view sizes */
 
 @media only screen and (min-width: 1065px) {
   .single_error_preview_container {
