@@ -9,6 +9,7 @@ import { changePage } from '../../store/ui';
 
 import ImagePopup from '../Modal/image_popup';
 import ErrorForm from '../Error/error_form';
+import ErrorPreview from '../Error/error_preview';
 
 import styles from './module.module.css';
 
@@ -56,24 +57,11 @@ const Module = () => {
           }).map(error => {
             return (
               <li
-                className={styles.error_container}
-                key={error.id}
-              >
-                <span className={styles.error_title}>{error.title}</span>
-                <span className={styles.error_desc}>{error.description}</span>
-                <div className={styles.img_container}>
-                  {error.images.map((image, idx) => {
-                    return (
-                      <img
-                        key={idx}
-                        className={styles.err_img}
-                        onClick={showImage}
-                        src={image}
-                      />
-                    )
-                  })}
-                </div>
-              </li>
+              className={styles.error_container}
+              key={error.id}
+            >
+              <ErrorPreview error={error} />
+            </li>
             )
           })}
         </ul>

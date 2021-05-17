@@ -84,12 +84,12 @@
   margin-bottom: 20px;
 }
 
-.error_previw_title {
+.error_preview_title {
   font-size: 18px;
   max-width: 80%;
 }
-.error_previw_user {
-  font-size: 16px;
+.error_preview_user {
+  font-size: 14px;
   max-width: 80%;
 }
 
@@ -115,10 +115,26 @@
 }
 
 .err_preview_img {
-  width: 200px;
+  width: 250px;
   height: 150px;
   object-fit: cover;
   margin-right: 10px;
   display: inline-block;
   cursor: pointer;
+}
+
+@media only screen and (min-width: 1065px) {
+  .single_error_preview_container {
+    max-width: 400px
+  }
+  
+  .error_preview_header {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .err_preview_img {
+    width: 180px;
+    height: 100px;
+  }
 }
