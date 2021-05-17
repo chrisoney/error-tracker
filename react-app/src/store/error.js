@@ -54,7 +54,7 @@ export default function reducer(
 ) {
   switch (action.type) {
     case GET_ERRORS:
-      return { ...state, ...action.payload }
+      return { ...action.payload }
     case ADD_ERROR:
       const newState = { ...state };
       newState[action.payload.id] = action.payload;

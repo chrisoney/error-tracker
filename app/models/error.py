@@ -5,7 +5,7 @@ class Error(db.Model):
   __tablename__ = 'errors'
 
   id = db.Column(db.Integer, primary_key = True)
-  title = db.Column(db.String(80), nullable = False)
+  title = db.Column(db.String(255), nullable = False)
   description = db.Column(db.Text, nullable = False)
   user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
   module_id = db.Column(db.Integer, db.ForeignKey('modules.id'), nullable=False)

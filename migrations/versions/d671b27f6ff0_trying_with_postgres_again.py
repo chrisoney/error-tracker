@@ -42,7 +42,7 @@ def upgrade():
     )
     op.create_table('errors',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('title', sa.String(length=80), nullable=False),
+    sa.Column('title', sa.String(length=255), nullable=False),
     sa.Column('description', sa.Text(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('module_id', sa.Integer(), nullable=False),
