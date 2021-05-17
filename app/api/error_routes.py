@@ -24,7 +24,7 @@ def errors():
   Sends back all of the error data
   """
   errors = Error.query.all()
-  return {"errorsArray": [error.to_dict() for error in errors]}
+  return {"errorsArray": { error.id: error.to_dict() for error in errors}}
 
 @error_routes.route('/', methods=['POST'])
 @login_required
@@ -74,5 +74,5 @@ def get_error_answers(id):
   Sends back all of the answers for a certain error
   """
   answers = Answer.query.filter_by(error_id=id)
-  return {"answers": [answer.to_dict() for answer in answers]}
+  return {"answers": {answer.id:answer.to_dict() for answer in answers}}
 
