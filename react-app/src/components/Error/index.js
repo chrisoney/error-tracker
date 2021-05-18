@@ -30,32 +30,46 @@ const Error = () => {
 
   return (
     <div className={styles.error_page_container}>
-      <div className={styles.error_page_header}>
-        <h1 className={styles.error_page_title}>{error?.title}</h1>
-      </div>
-      <div className={styles.error_page_content}>
-        <div className={styles.error_page_body}>
-          {error?.description}
+        <div className={styles.main_error_container}>
+        <div className={styles.error_page_header}>
+          <h1 className={styles.error_page_title}>{error?.title}</h1>
         </div>
-        <div className={styles.error_page_image_container}>
-            {error?.images.map((img,idx) => {
-              return (
-                <img
-                  alt=""
-                  key={`err-img-${idx}`}
-                  className={styles.error_page_image}
-                  src={img}
-                  onClick={showImage}
-                />
-              )
-            })}
+        <div className={styles.error_page_content}>
+          <div className={styles.error_page_body}>
+            {error?.description}
           </div>
-        {/* New Answer form */} 
+          <div className={styles.error_page_image_container}>
+              {error?.images.map((img,idx) => {
+                return (
+                  <img
+                    alt=""
+                    key={`err-img-${idx}`}
+                    className={styles.error_page_image}
+                    src={img}
+                    onClick={showImage}
+                  />
+                )
+              })}
+            </div>
+        </div>
       </div>
+      <form className={styles.answer_form}>
+        <h3 className={styles.answer_form_header}>
+          Submit an answer for this error
+        </h3>
+        <div className={styles.answer_form_input_section}>
+          {/* Description input */}
+          {/* Image input */}
+        </div>
+        <div className={styles.answer_form_img_previews}>
+          {/* Image previews modeled after error form */}
+        </div>
+      </form>
       <ul className={styles.error_page_answer_list}>
         {answers?.map(ans => {
           return (
             <li key={`answer-${ans.id}`} className={styles.ans_list_item}>
+              <span className={styles.ans_user}>{ans.user_username}</span>
               <span className={styles.ans_desc}>{ans.description}</span>
               <div className={styles.ans_image_container}>
                 {ans.images.map((img,idx) => {

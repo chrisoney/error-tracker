@@ -28,6 +28,7 @@ class Answer(db.Model):
       "id": self.id,
       "description": self.description,
       "user_id": self.user.id,
+      "user_username": self.user.username,
       "error_id": self.error.id,
       "images": [image.url for image in self.images]
     }
