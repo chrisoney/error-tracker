@@ -124,9 +124,39 @@
 
 /* Error Page Styling */
 
+.error_page_container {
+  max-height: 85vh;
+  padding: 20px;
+}
 
+.error_page_header {
+  display: flex;
+}
 
+.error_page_title {
+  font-size: 24px;
+}
 
+.error_page_content {
+  display: flex;
+  flex-direction: column;
+}
+
+.error_page_body {
+  font-size: 16px;
+}
+
+.error_page_image_container{
+  display: flex;
+}
+
+.error_page_image{
+  width: 300px;
+  height: 200px;
+  object-fit: cover;
+  margin-right: 20px;
+  margin-bottom: 10px;
+}
 
 /* Different view sizes */
 

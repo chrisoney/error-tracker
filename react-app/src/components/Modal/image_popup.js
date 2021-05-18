@@ -7,7 +7,7 @@ const ImagePopup = (props) => {
 
   return (
     <>
-      <img src={src} className={styles.modal_img_popup} />
+      <img src={src} alt="" className={styles.modal_img_popup} />
     </>
   )
 }
