@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
-import Chat from './Chat'
 
 function User() {
   const [user, setUser] = useState({});
-  const dispatch = useDispatch();
   // Notice we use useParams here instead of getting the params
   // From props.
   const { userId } = useParams();
-  const messages = useSelector(state => state.messages);
 
   useEffect(() => {
     if (!userId) {

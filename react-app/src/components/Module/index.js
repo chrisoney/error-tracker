@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { NavLink, Redirect, Link,  useParams } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'
 
 import { openModal, setCurrent, setProps } from '../../store/modal';
@@ -7,7 +7,6 @@ import { fetchAllModules } from '../../store/module';
 import { fetchAllErrors } from '../../store/error';
 import { changePage } from '../../store/ui';
 
-import ImagePopup from '../Modal/image_popup';
 import ErrorForm from '../Error/error_form';
 import ErrorPreview from '../Error/error_preview';
 
@@ -18,11 +17,6 @@ const Module = () => {
   const dispatch = useDispatch();
   const errors = useSelector(state => state.errors)
   
-  const showImage = (e) => {
-    dispatch(setCurrent(ImagePopup));
-    dispatch(setProps({imageSrc: e.target.src }))
-    dispatch(openModal());
-  };
   const newError = (e) => {
     dispatch(setCurrent(ErrorForm));
     dispatch(setProps({module_id: id }))

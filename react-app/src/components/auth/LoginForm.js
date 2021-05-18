@@ -32,7 +32,7 @@ const LoginForm = (props) => {
     if (props.location.state && props.location.state.errors) {
       setErrors(props.location.state.errors)
     }
-  }, [dispatch])
+  }, [dispatch, props.location.state])
 
   if (sessionLoaded && user) {
     return <Redirect to='/home' />;

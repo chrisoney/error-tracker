@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { io } from 'socket.io-client';
-import { fetchAllMessages, createNewMessage } from '../../store/message';
+import { fetchAllMessages } from '../../store/message';
 
 import styles from './chat.module.css';
 let socket;
@@ -35,7 +35,7 @@ const Chat = (props) => {
         socket.emit('disconnected', { userId: user.id})
       });
     })
-  }, [])
+  }, [user.id])
 
   useEffect(() => {
     dispatch(fetchAllMessages())
@@ -52,7 +52,7 @@ const Chat = (props) => {
       }
     })
     setMessages([...filteredMessages])
-  }, [oldMessages])
+  }, [oldMessages, id])
 
 
   const updateChatInput = (e) => {

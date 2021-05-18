@@ -20,7 +20,7 @@ const Error = () => {
   useEffect(() => {
     dispatch(fetchSingleError(id));
     dispatch(fetchErrorAnswers(id));
-  }, [])
+  }, [dispatch, id])
 
   const showImage = (e) => {
     dispatch(setCurrent(ImagePopup));
@@ -41,6 +41,7 @@ const Error = () => {
             {error?.images.map((img,idx) => {
               return (
                 <img
+                  alt=""
                   key={`err-img-${idx}`}
                   className={styles.error_page_image}
                   src={img}
@@ -60,9 +61,11 @@ const Error = () => {
                 {ans.images.map((img,idx) => {
                   return (
                     <img
+                      alt=""
                       key={`ans-${ans.id}-img-${idx}`}
                       className={styles.ans_image}
                       src={img}
+                      onClick={showImage}
                     />
                   )
                 })}

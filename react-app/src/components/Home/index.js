@@ -1,14 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { NavLink, Redirect, Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import styles from './home.module.css';
 
 
 import ErrorPreview from '../Error/error_preview';
 
-import { fetchAllModules, addNewModule } from '../../store/module';
 import { fetchAllErrors } from '../../store/error';
-import { fetchAllMessages } from '../../store/message';
 import { changePage } from '../../store/ui';
 
 const Home = () => {

@@ -74,7 +74,7 @@ const ChatContainer = () => {
       // });
       socket.disconnect()
     })
-  }, [])
+  }, [dispatch, sessionUser])
 
   useEffect(() => {
     dispatch(fetchAllMessages())
@@ -138,6 +138,7 @@ const ChatContainer = () => {
         <div>{user.username}</div>
       </li>
     );
+    else return null;
   });
 
   function unreadCount(id) {

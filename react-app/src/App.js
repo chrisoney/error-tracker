@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
 import LoginForm from "./components/auth/LoginForm";
@@ -16,9 +16,6 @@ import Error from './components/Error';
 import ChatContainer from './components/Chat/chat_container';
 import Sidebar from './components/Sidebar';
 import { authenticate } from './store/session';
-import { fetchAllMessages } from './store/message';
-import { fetchAllModules } from './store/module';
-import { fetchAllErrors } from './store/error';
 
 function App() {
   const dispatch = useDispatch();
@@ -30,7 +27,6 @@ function App() {
 
   useEffect(() => {
     dispatch(authenticate())
-    // dispatch(fetchAllMessages())
   }, [dispatch]);
 
   return (

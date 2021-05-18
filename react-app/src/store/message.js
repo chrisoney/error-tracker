@@ -1,5 +1,5 @@
 const GET_MESSAGES = 'messages/get_all';
-const ADD_MESSAGE = 'messages/add'
+const ADD_MESSAGE = 'messages/add';
 
 const getAllMessages = (messages) => ({
   type: GET_MESSAGES,
@@ -19,7 +19,7 @@ export const fetchAllMessages = () => async dispatch => {
 }
 
 export const createNewMessage = (body, recipientId) => async dispatch => {
-  const formData = new FormData;
+  const formData = new FormData();
   formData.append('body', body)
   formData.append('recipient_id', recipientId)
   const response = await fetch('/api/messages/', {

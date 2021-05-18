@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { NavLink, Redirect, Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'
 import styles from './splash.module.css';
 
@@ -80,11 +80,11 @@ const Splash = () => {
           <a
             href='https://github.com/chrisoney'
             className={`${styles.about_icon} fab fa-github`}
-          />
+          > </a>
           <a
             href='https://www.linkedin.com/in/christopher-oney-317b84132/'
             className={`${styles.about_icon} fab fa-linkedin`}
-          />
+          > </a>
         </div>
         <div className={styles.about_section_right}>ErrorTracker 2021</div>
       </div>

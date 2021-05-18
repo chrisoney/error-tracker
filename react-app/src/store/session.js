@@ -45,7 +45,7 @@ export const logout = () => async dispatch => {
       "Content-Type": "application/json",
     }
   });
-  dispatch(destroySession())
+  if (response.ok) dispatch(destroySession())
 };
 
 

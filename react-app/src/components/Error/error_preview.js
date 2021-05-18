@@ -31,6 +31,7 @@ const ErrorPreview = ({error}) => {
           {error.images.map((image, idx) => {
             return (
               <img
+                alt=""
                 key={idx}
                 className={styles.err_preview_img}
                 src={image}

@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { Redirect } from "react-router-dom";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { addNewError } from "../../store/error";
 import { closeModal } from '../../store/modal';
@@ -100,7 +99,7 @@ const ErrorForm = (props) => {
       </div>
       <div className={styles.image_container}>
         {imageUrls.map((image, idx) => {
-          return <img key={idx} className={styles.preview_image} src={image}/>
+          return <img key={idx} alt="" className={styles.preview_image} src={image}/>
         })}
       </div>
       {(imageLoading) && <p className={styles.loading}>Loading...</p>}
