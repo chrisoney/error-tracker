@@ -6,6 +6,7 @@ import { fetchErrorAnswers } from '../../store/answer';
 import { fetchSingleError } from '../../store/error';
 import { setCurrent, setProps, openModal } from '../../store/modal'
 import ImagePopup from '../Modal/image_popup';
+import Answer from '../Answer';
 
 import styles from './error.module.css';
 
@@ -68,23 +69,7 @@ const Error = () => {
       <ul className={styles.error_page_answer_list}>
         {answers?.map(ans => {
           return (
-            <li key={`answer-${ans.id}`} className={styles.ans_list_item}>
-              <span className={styles.ans_user}>{ans.user_username}</span>
-              <span className={styles.ans_desc}>{ans.description}</span>
-              <div className={styles.ans_image_container}>
-                {ans.images.map((img,idx) => {
-                  return (
-                    <img
-                      alt=""
-                      key={`ans-${ans.id}-img-${idx}`}
-                      className={styles.ans_image}
-                      src={img}
-                      onClick={showImage}
-                    />
-                  )
-                })}
-              </div>
-            </li>
+            <Answer key={`answer-${ans.id}`} answer={ans} />
           )
         })}
       </ul>

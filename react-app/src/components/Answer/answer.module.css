@@ -1,0 +1,32 @@
+.ans_list_item {
+  width: 540px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  border: 1px solid black;
+  box-shadow: 1px 1px 2px 1px rgba(0,0,0, .2);
+}
+
+.ans_user {
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.ans_desc {
+  font-size: 14px;
+}
+
+.ans_image_container {
+  display: flex;
+  max-width: 100%;
+}
+
+.ans_image {
+  width: 100px;
+  height: auto;
+  object-fit: cover;
+  margin-right: 20px;
+  margin-bottom: 10px;
+}
