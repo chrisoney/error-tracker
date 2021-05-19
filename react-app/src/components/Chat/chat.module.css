@@ -23,12 +23,43 @@
   color: white;
 }
 
-.user_list_label.close {
-  justify-content: flex-end;
+.user_menu_button {
+  position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 20px;
+	width: 20px;
+	transition: all .2s cubic-bezier(.175,.885,.32,1.275);
 }
 
-.user_list_label.open {
-  justify-content: flex-start;
+.user_menu_button > span {
+  position: absolute;
+  height: 50%;
+  transform-origin: 50% 50%;
+  height: 2px;
+  width: 50%;
+  background-color: white;
+  border-radius: 1px;
+  transition: inherit;
+}
+.user_menu_button > span:first-child {
+  transform:rotate(0deg) translate3d(0,-4px,0);
+}
+.user_menu_button > span:nth-child(2) {
+  opacity: 1;
+}
+.user_menu_button > span:last-child {
+  transform:rotate(0deg) translate3d(0,4px,0);
+}
+.user_menu_button.menu_open > span:first-child {
+  transform:rotate(45deg) translate3d(0,0,0);
+}
+.user_menu_button.menu_open > span:nth-child(2) {
+  opacity: 0;
+}
+.user_menu_button.menu_open > span:last-child {
+  transform:rotate(-45deg) translate3d(0,0,0);
 }
 
 .user_list {

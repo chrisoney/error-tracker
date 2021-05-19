@@ -215,13 +215,19 @@ const ChatContainer = () => {
       </div>
       <div className={styles.user_list_container}>
         <div
-          className={`${styles.user_list_label} 
-                      ${listReveal ? styles.close : styles.open}`}
+          className={styles.user_list_label}
           onClick={() => setListReveal(!listReveal)}
-        >{listReveal
-            ? <i className={`${styles.list_exit} fas fa-times-circle`} />
-            : <div className={styles.list_open}>User List</div>}
-            </div>
+        >
+          <div
+            className={`${styles.user_menu_button}
+            ${listReveal ? styles.menu_open : "styles.open"}`}
+          >
+            <span className={styles.user_menu_bar}></span>
+            <span className={styles.user_menu_bar}></span>
+            <span className={styles.user_menu_bar}></span>
+          </div>
+          <div className={styles.list_open}>User List</div>
+        </div>
         {listReveal && <ul className={styles.user_list}>
           <div
             onClick={() => setListReveal(!listReveal)}
