@@ -92,8 +92,12 @@
   margin-right: 10px;
 }
 
-.online {
+.fas.fa-circle {
   color: green;
+}
+
+.far.fa-circle {
+  font-weight: bolder;
 }
 
 .open_chat_username_container{

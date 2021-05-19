@@ -133,8 +133,8 @@ const ChatContainer = () => {
         onClick={(e) => openNewChat(e, user)}
         className={styles.user_list_user_container}
       >
-        <i className={`fas fa-circle ${styles.status} ${online.includes(user.id)
-          ? styles.online : ''}`} />
+        <i className={`fa-circle ${styles.status} ${online.includes(user.id)
+          ? 'fas' : 'far'}`} />
         <div>{user.username}</div>
       </li>
     );

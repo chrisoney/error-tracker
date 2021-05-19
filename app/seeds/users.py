@@ -8,11 +8,11 @@ def seed_users():
                 password='password')
     jesse = User(username='Jesse', email='jesse@aa.io',
                 password='password')
-    jm = User(username='jm', email='jm@aa.io',
+    jm = User(username='JM', email='jm@aa.io',
                 password='password')
     senyo = User(username='Senyo', email='senyo@aa.io',
                 password='password')
-    daniel = User(username='Daniel', email='daniel@aa.io',
+    olivia = User(username='Olivia', email='olivia@aa.io',
                 password='password')
     alec = User(username='Alec', email='alec@aa.io',
                 password='password')
@@ -22,12 +22,6 @@ def seed_users():
                 password='password')
     rihana = User(username='Rihana', email='rihana@aa.io',
                 password='password')
-
-    # db.session.add(chris)
-    # db.session.add(jesse)
-    # db.session.add(jm)
-    # db.session.add(senyo)
-    # db.session.add(daniel)
     
     four = Module.query.filter_by(name='Module 4').first()
     seven = Module.query.filter_by(name='Module 7').first()
@@ -41,7 +35,7 @@ def seed_users():
     seven.users.append(jesse)
     seven.users.append(jm)
     seven.users.append(senyo)
-    seven.users.append(daniel)
+    seven.users.append(olivia)
 
     db.session.commit()
 
