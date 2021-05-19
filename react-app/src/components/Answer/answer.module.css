@@ -33,7 +33,25 @@
 
 
 /* Answer Form */
+.answer_form_container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
 
+.answer_form {
+  width: 80%;
+}
+
+.answer_form_header{
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.answer_form_input_section {
+  display: flex;
+}
 
 .answer_form_img_previews {
   display: flex;
@@ -49,8 +67,19 @@
   margin-left: 20px;
 }
 
+.description_input{
+  width: 50%;
+  resize: none;
+  outline: none;
+}
+
+.description_input::selection{
+}
+.upload_label_box{
+  width: 50%;
+}
+
 .upload_container {
-  width: 90%;
   background-color: rgba(0,0,0, .07);
   border: 1px dashed rgba(0,0,0, .13);
   color: rgba(0,0,0, .65);
