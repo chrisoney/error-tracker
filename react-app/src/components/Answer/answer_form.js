@@ -18,6 +18,7 @@ const AnswerForm = ({error_id}) => {
   const onSubmit = async (e) => {
     e.preventDefault();
     setImageLoading(true);
+    console.log(images)
     dispatch(addNewAnswer(
       description,
       user.id,
@@ -26,6 +27,9 @@ const AnswerForm = ({error_id}) => {
     ))
       .then(() => {
         setImageLoading(false);
+        setDescription("");
+        setImages([]);
+        setImageUrls([]);
       })
       .catch(err => {
         setImageLoading(false);

@@ -59,7 +59,7 @@ def new_answer():
         )
       db.session.add(answer)
       for new_url in urls:
-        image = Image(url=new_url, parent_type='error')
+        image = Image(url=new_url, parent_type='answer')
         answer.images.append(image)
 
       db.session.commit()
