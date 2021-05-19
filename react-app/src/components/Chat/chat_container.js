@@ -176,13 +176,16 @@ const ChatContainer = () => {
               className={styles.open_chat_container}
             >
               <div
-                className={styles.open_chat_username}
+                className={`${styles.open_chat_username_container}
+                ${user.id === selectedUser ? styles.selected_chat : null}`}
                 onClick={() => openChatMessages(user.id)}
               >
-                <span>{user.username}</span>
-                <span>
-                  {unreadCount(user.id) +
-                    (newAlerts[user.id] || 0)}
+                <span className={styles.open_chat_username}>
+                  {user.username}
+                </span>
+                <span className={styles.open_chat_notifications}>
+                  {(unreadCount(user.id) +
+                    (newAlerts[user.id]) || null)}
                 </span>
               </div>
               {user.id === selectedUser
@@ -229,10 +232,6 @@ const ChatContainer = () => {
           <div className={styles.list_open}>User List</div>
         </div>
         {listReveal && <ul className={styles.user_list}>
-          <div
-            onClick={() => setListReveal(!listReveal)}
-            className={styles.list_header}
-          >User List</div>
           {userList}
         </ul>}
       </div>
