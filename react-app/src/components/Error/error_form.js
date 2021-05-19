@@ -69,7 +69,7 @@ const ErrorForm = (props) => {
     const url = URL.createObjectURL(file)
     setImageUrls([...imageUrls, url])
     setImages([...images, file]);
-}
+  }
 
   return (
     <form className={styles.form} onSubmit={onSubmit}>

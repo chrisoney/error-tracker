@@ -48,7 +48,7 @@ export const addNewAnswer = (description, user_id, error_id, images) => async di
   })
   const data = await response.json();
   if (data.errors) {
-    const err = new Error('Unauthorized');
+    const err = new Error('Error in creating answer');
     err.errors = data.errors;
     throw err;
   } else dispatch(addAnswer(data.answer));

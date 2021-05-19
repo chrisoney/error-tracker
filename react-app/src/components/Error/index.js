@@ -7,6 +7,7 @@ import { fetchSingleError } from '../../store/error';
 import { setCurrent, setProps, openModal } from '../../store/modal'
 import ImagePopup from '../Modal/image_popup';
 import Answer from '../Answer';
+import AnswerForm from '../Answer/answer_form';
 
 import styles from './error.module.css';
 
@@ -54,18 +55,7 @@ const Error = () => {
             </div>
         </div>
       </div>
-      <form className={styles.answer_form}>
-        <h3 className={styles.answer_form_header}>
-          Submit an answer for this error
-        </h3>
-        <div className={styles.answer_form_input_section}>
-          {/* Description input */}
-          {/* Image input */}
-        </div>
-        <div className={styles.answer_form_img_previews}>
-          {/* Image previews modeled after error form */}
-        </div>
-      </form>
+      <AnswerForm error_id={id}/>
       <ul className={styles.error_page_answer_list}>
         {answers?.map(ans => {
           return (

@@ -28,7 +28,7 @@ def errors():
 
 @error_routes.route('/', methods=['POST'])
 @login_required
-def that():
+def new_error():
   """
   Creates a new error
   """

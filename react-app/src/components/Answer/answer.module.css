@@ -30,3 +30,61 @@
   margin-right: 20px;
   margin-bottom: 10px;
 }
+
+
+/* Answer Form */
+
+
+.answer_form_img_previews {
+  display: flex;
+  flex-flow: row wrap;
+}
+.answer_form_img_previews > .preview_image {
+  width: 200px;
+  height: 100px;
+  object-fit: cover;
+  float:left;
+}
+.preview_image:nth-child(2n){
+  margin-left: 20px;
+}
+
+.upload_container {
+  width: 90%;
+  background-color: rgba(0,0,0, .07);
+  border: 1px dashed rgba(0,0,0, .13);
+  color: rgba(0,0,0, .65);
+  cursor: pointer;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.upload_container.file_hover {
+  background-color: #666;
+}
+
+.camera_icon {
+  margin-bottom: 5px;
+  font-size: 30px;
+}
+
+.image_label {
+  font-size: 18px;
+}
+
+.upload_input {
+  display:none;
+}
+
+.button_container {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 5px;
+}
+
+.form_button {
+  cursor: pointer;
+  padding: 5px 10px;
+}
