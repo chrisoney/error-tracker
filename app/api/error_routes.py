@@ -40,6 +40,7 @@ def new_error():
       return {"errors": "file type not permitted"}, 400
     img.filename = get_unique_filename(img.filename)
     upload = upload_file_to_s3(img)
+    print(upload)
     if "url" not in upload:
         # if the dictionary doesn't have a url key
         # it means that there was an error when we tried to upload

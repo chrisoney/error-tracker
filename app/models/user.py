@@ -57,5 +57,6 @@ class User(db.Model, UserMixin):
       "username": self.username,
       "email": self.email,
       "error_ids": [error.id for error in self.errors],
-      "answer_ids": [answer.id for answer in self.answers]
+      "answer_ids": [answer.id for answer in self.answers],
+      "subscribed_modules": [module.to_dict() for module in self.modules],
     }
