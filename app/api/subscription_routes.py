@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from app.models import db, User, Module
+from app.models import db, User, Module, subscriptions
 
 subscription_routes = Blueprint('subscriptions', __name__)
 
@@ -15,11 +15,16 @@ def validation_errors_to_error_messages(validation_errors):
     return errorMessages
 
 @subscription_routes.route('/')
-@login_required
-def modules_subscribed():
+# @login_required
+def users_not_subscribed():
   """
   Sends back all of the subscription data
   """
-  user = User.query.get(current_user.id)
-  return {"subscriptions": [module.to_dict() for module in user.modules]}
+#   user = User.query.get(1)
+  # modules = Module.query.filter(Module.users.any(User.id == current_user.id)).all()
+
+
+  users = User.query.filter(~User.followers.any(User.id == 23)).all()
+#   return {"subscriptions": [module.to_dict() for module in modules]}
+  return {'users': [user.to_dict() for user in users]}
 

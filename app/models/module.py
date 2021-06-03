@@ -22,4 +22,5 @@ class Module(db.Model):
     return {
       "id": self.id,
       "name": self.name,
+      "userIds": [user.id for user in self.users]
     }

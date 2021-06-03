@@ -6,3 +6,4 @@ from .image import Image
 from .error import Error
 from .answer import Answer
 from .message import Message
+from .follow import follows

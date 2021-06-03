@@ -2,6 +2,7 @@ from .db import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from .subscription import subscriptions
+from .follow import follows
 from .message import Message
 
 class User(db.Model, UserMixin):
@@ -17,6 +18,16 @@ class User(db.Model, UserMixin):
     secondary=subscriptions, 
     back_populates="users"
   )
+
+  follows = db.relationship(
+        "User", 
+        secondary=follows,
+        primaryjoin=(follows.c.follower_id == id),
+        secondaryjoin=(follows.c.user_id == id),
+        backref=db.backref("followers", lazy="dynamic"),
+        lazy="dynamic"
+    )
+
   errors = db.relationship(
     "Error", 
     back_populates="user"

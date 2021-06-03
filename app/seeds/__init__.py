@@ -5,6 +5,7 @@ from .errors import seed_errors, undo_errors
 from .images import seed_images, undo_images
 from .answers import seed_answers, undo_answers
 from .messages import seed_messages, undo_messages
+from .follows import seed_follows, undo_follows
 
 # Creates a seed group to hold our commands
 # So we can type `flask seed --help`
@@ -19,6 +20,7 @@ def seed():
     seed_images()
     seed_answers()
     seed_messages()
+    seed_follows()
     # Add other seed functions here
 
 # Creates the `flask seed undo` command
@@ -30,4 +32,5 @@ def undo():
     undo_images()
     undo_answers()
     undo_messages()
+    undo_follows()
     # Add other undo functions here

@@ -16,13 +16,13 @@ from .api.module_routes import module_routes
 from .api.error_routes import error_routes
 from .api.answer_routes import answer_routes
 from .api.message_routes import message_routes
+from .api.subscription_routes import subscription_routes
 
 from .seeds import seed_commands
 
 from .config import Config
 
 app = Flask(__name__)
-
 # Setup login manager
 login = LoginManager(app)
 login.login_view = 'auth.unauthorized'
@@ -51,6 +51,7 @@ app.register_blueprint(module_routes, url_prefix='/api/modules')
 app.register_blueprint(error_routes, url_prefix='/api/errors')
 app.register_blueprint(answer_routes, url_prefix='/api/answers')
 app.register_blueprint(message_routes, url_prefix='/api/messages')
+app.register_blueprint(subscription_routes, url_prefix='/api/subscriptions')
 db.init_app(app)
 Migrate(app, db)
 socketio.init_app(app)
